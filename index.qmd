@@ -1,0 +1,5 @@
+# Preface {.unnumbered}
+
+Welcome to Geospatial Data Science and Analytics with KNIME and Geospatial Analytics Extension for KNIME (GAEK). This workbook aims to share with you the theory, the methods and the GAEK nodes specially designed to extend the functionalities of KNBIME to meet the challenges of handling, processing analysing, modelling and visualising geographic problems and data.
+
+It is a workbook for supporting the teaching need of ISSS626 Geospatial Analytics and Appications. However, it can be used by geospatial scientists and casual data analysts who are interested address real world geographic problems without having to use conventional Geographic Information Systems (GIS).
