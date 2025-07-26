@@ -20,7 +20,7 @@ This chapter provides users of this workbook step-by-step guides on:
 
 -   installing KNIME Analytics Platform (AP),
 -   creating KNIME workspace, and
--   installing Geospatial Analytics Extension of KNIME (GAEK)   
+-   installing Geospatial Analytics Extension of KNIME (GAEK)
 
 ## Installing KNIME
 
