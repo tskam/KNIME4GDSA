@@ -1,12 +1,46 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Geospatial Data Science and Analytics with KNIME and GAEK",
+    "objectID": "chap01.html",
+    "href": "chap01.html",
+    "title": "1  Getting Started with KNIME for Geospatial Analytics",
     "section": "",
-    "text": "Preface\nWelcome to Geospatial Data Science and Analytics with KNIME and Geospatial Analytics Extension for KNIME (GAEK). This workbook aims to share with you the theory, the methods and the GAEK nodes specially designed to extend the functionalities of KNBIME to meet the challenges of handling, processing analysing, modelling and visualising geographic problems and data.\nIt is a workbook for supporting the teaching need of ISSS626 Geospatial Analytics and Appications. However, it can be used by geospatial scientists and casual data analysts who are interested address real world geographic problems without having to use conventional Geographic Information Systems (GIS).",
+    "text": "1.1 Overview\nKonstanz Information Miner, KNIME is a free and open-source data analytics and reporting platform that allows users to build and deploy data workflows using a visual, drag-and-drop interface. It is designed for both non-technical users and experienced data scientists, enabling them to access, blend, analyze, and visualize data without needing to write code. KNIME supports a wide range of data science and analytics tasks, from basic automation to advanced Machine Learning analytics.\nThe Geospatial Analytics Extension for KNIME (GAEK) is a visual programming tool that integrates geospatial analysis with KNIME Analytics Platform. It allows users to perform spatial data analysis and visualization without coding, using nodes for common geospatial tasks and data types. It was developed through a collaboration between the Center for Geographic Analysis at Harvard University and KNIME.Geospatial Analytics Extension of KNIME (GAEK)\nThis chapter provides users of this workbook step-by-step guides on:",
     "crumbs": [
-      "Preface"
+      "The Building Block",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with KNIME for Geospatial Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "chap01.html#overview",
+    "href": "chap01.html#overview",
+    "title": "1  Getting Started with KNIME for Geospatial Analytics",
+    "section": "",
+    "text": "installing KNIME Analytics Platform (AP),\ncreating KNIME workspace, and\ninstalling Geospatial Analytics Extension of KNIME (GAEK)",
+    "crumbs": [
+      "The Building Block",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with KNIME for Geospatial Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "chap01.html#installing-knime",
+    "href": "chap01.html#installing-knime",
+    "title": "1  Getting Started with KNIME for Geospatial Analytics",
+    "section": "1.2 Installing KNIME",
+    "text": "1.2 Installing KNIME\n\nLaunch a web browser.\nType www.knime.com on the search pane of the web browser.\n\nYour screen should look similar to the screenshot below.\n\n\nClick on Software -&gt; Download.\n\nYour screen should look similar to the screenshot below.\n\n\nFill in information required on the registration form.\nClick on the two checkboxes on the form.\nClick on Download button located at the bottom of the form.\n\nThe Download page of KNIME appears as shown below.\n\n\nDownload the proper version of KNIME AP installation files according to the operating system (OS) of your computer.\n\n\n\nWhen the downloading completed, extract the archive or run the installer and start the executable file (under Windows, knime.exe; under Linux knime and under Mac, knime.app). For detailed instructions, please refer to the file readme.txt in the archive.\n\n\n1.2.1 Creating the workspace\nWorking with KNIME, it is always a good practice to create a workspace. In KNIME, a workspace is a folder on your computer where KNIME Analytics Platform stores your workflows, node configurations, and data. It acts as the central location for all your projects, allowing you to organize, save, and retrieve your work. Essentially, it’s the directory where KNIME keeps everything related to your data analysis and workflows.\n\nCreate a new workspace in the local harddisk as should below.\n\n\n\n\n1.2.2 Increasing the RAM\nFor better performance, users can revise the maximum RAM usage limitation in the file knime.ini under the installation folder.\n\nNavigate to KNIME programme folder, for example \\Users\\tskam\\AppData\\Local\\Programs\\KNIME\\.\nOpen the knime.ini by using a text editor such as NotePad for Windows OS users\nScolldown the page until the line -Xmx1024m appears, change to -Xmx64g to increase the RAM limitation for KNIME AP from 1024 Megabytes (Mb) to 64 Gigabytes (Gb).\n\n\n\n\n\n\n\nNote\n\n\n\nYou should change the setting according to the RAM available on your computer. On the guide above 64 is used because my laptop installed with 64Gb RAM.",
+    "crumbs": [
+      "The Building Block",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with KNIME for Geospatial Analytics</span>"
+    ]
+  },
+  {
+    "objectID": "chap01.html#installing-geospatial-analytics-extension-of-knime-gaek",
+    "href": "chap01.html#installing-geospatial-analytics-extension-of-knime-gaek",
+    "title": "1  Getting Started with KNIME for Geospatial Analytics",
+    "section": "1.3 Installing Geospatial Analytics Extension of KNIME (GAEK)",
+    "text": "1.3 Installing Geospatial Analytics Extension of KNIME (GAEK)\nIn this section, you will learn how to install Geospatial Analytics Extension for KNIME (GAEK).\n\nLaunch KNIME.\n\nThe KNIME Analytics Platform Launcher dialog window appears and prompt you to select a directory as workspace.\n\n\nClick at the Browse button located on the right of the dialog window.\n\nThe Select Workspace Directory dialog window appears.\n\n\nSelect the newly created workspace folder. From the figure above, it will be GDSA-workspace.\nClick on Select Folder button.\n\nYou will return to KNIME Analytics Platform Launcher again.\n\n\nClick on Launch button.\n\nKNIME Workbench appears.\n\n\nFrom the upper right corner of the KNIME Workbench window, click on Menu.\n\n\n\nSelect Install extensions from the dropdown list.\n\nThe Install dialog window appears.\n\nSince we know the extension we would like to install (i.e. Geospatial Analytics Extension for KNIME), to allocate the extension, we can type the word Geospatial Analytics on the search pane as shown below.\n\nNotice that Geospatial Analytics Extension for KNIME appears on the search result pane.\n\nClick on the checkbox in front of Geospatial Analytics Extension for KNIME.\n\n\n\nClick on Next button.\n\nKNIME will start to download the extension.\nWhen the downloading is completed,\n\nClick on Finish button located on the bottom of the dialog window.\n\nKNIME will start to install the extension. Be patient, the installation will take a few minutes depend on how fast is your computer.\nNext KNIME will prompt you to restart the system.\n\n\nClick on Restart Now button.\n\nAfter a few seconds, KNIME workbench appears.\nIt is always a good practice to check if the extension has been installed properly.\n\nFrom the upper right menu of the workbench, click on Help.\n\n\n\nSelect About KNIME Analytics Platform from the dropdown list.\n\n\nThe About KNIME Analytics Platform window appears.\n\n\nClick on Installation Details button located at the bottom left corner of the window.\n\nThe KNIME Analytics Platform Installation Details appears.\n\nNotice that Geospatial Analytics Extension for KNIME is listed at the very top.\n\nClick on the Close button to close KNIME Analytics Platform Installation Details window.\n\nYou will return to The About KNIME Analytics Platform window window.\n\nClick on the Close button to close The About KNIME Analytics Platform window.\n\nCongratulations! You have installed KNIME and GAEK successfully!",
+    "crumbs": [
+      "The Building Block",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with KNIME for Geospatial Analytics</span>"
     ]
   },
   {
@@ -1524,61 +1558,6 @@
     "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2",
     "crumbs": [
       "<span class='chapter-number'>18</span>  <span class='chapter-title'>Summary</span>"
-    ]
-  },
-  {
-    "objectID": "chap01.html",
-    "href": "chap01.html",
-    "title": "1  Getting Started with KNIME for Geospatial Analytics",
-    "section": "",
-    "text": "1.1 Overview\nKNIME is a free and open-source data analytics and reporting platform that allows users to build and deploy data workflows using a visual, drag-and-drop interface. It is designed for both non-technical users and experienced data scientists, enabling them to access, blend, analyze, and visualize data without needing to write code. KNIME supports a wide range of data science and analytics tasks, from basic automation to advanced geospatial data analytics.\nThe Geospatial Analytics Extension for KNIME (GAEK) is a visual programming tool that integrates geospatial analysis with KNIME Analytics Platform. It allows users to perform spatial data analysis and visualization without coding, using nodes for common geospatial tasks and data types. It was developed through a collaboration between the Center for Geographic Analysis at Harvard University and KNIME.Geospatial Analytics Extension of KNIME (GAEK)\nThis chapter aims to provide users of this workbook step-by-step guides on:",
-    "crumbs": [
-      "The Building Block",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with KNIME for Geospatial Analytics</span>"
-    ]
-  },
-  {
-    "objectID": "chap01.html#overview",
-    "href": "chap01.html#overview",
-    "title": "1  Getting Started with KNIME for Geospatial Analytics",
-    "section": "",
-    "text": "installing KNIME Analytics Platform (AP),\ninstalling Geospatial Analytics Extension of KNIME (GAEK),\nsetting up R Statistical Integration",
-    "crumbs": [
-      "The Building Block",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with KNIME for Geospatial Analytics</span>"
-    ]
-  },
-  {
-    "objectID": "chap01.html#installing-knime",
-    "href": "chap01.html#installing-knime",
-    "title": "1  Getting Started with KNIME for Geospatial Analytics",
-    "section": "1.2 Installing KNIME",
-    "text": "1.2 Installing KNIME\n\nLaunch a web browser.\nType www.knime.com on the search pane of the web browser.\n\nYour screen should look similar to the screenshot below.\n\n\nClick on Software -&gt; Download.\n\nYour screen should look similar to the screenshot below.\n\n\nFill in information required on the registration form.\nClick on the two checkboxes on the form.\nClick on Download button located at the bottom of the form.\n\nThe Download page of KNIME appears as shown below.\n\n\nDownload the proper version of KNIME AP installation files according to the operating system (OS) of your computer.\n\n\n\nWhen the downloading completed, extract the archive or run the installer and start the executable file (under Windows, knime.exe; under Linux knime and under Mac, knime.app). For detailed instructions, please refer to the file readme.txt in the archive.\n\n\n1.2.1 Creating the workspace\nWorking with KNIME, it is always a good practice to create a workspace. In KNIME, a workspace is a folder on your computer where KNIME Analytics Platform stores your workflows, node configurations, and data. It acts as the central location for all your projects, allowing you to organize, save, and retrieve your work. Essentially, it’s the directory where KNIME keeps everything related to your data analysis and workflows.\n\nCreate a new workspace in the local harddisk as should below.\n\n\n\n\n1.2.2 Increasing the RAM\nFor better performance, users can revise the maximum RAM usage limitation in the file knime.ini under the installation folder.\n\nNavigate to KNIME programme folder, for example \\Users\\tskam\\AppData\\Local\\Programs\\KNIME\\.\nOpen the knime.ini by using a text editor such as NotePad for Windows OS users\nScolldown the page until the line -Xmx1024m appears, change to -Xmx64g to increase the RAM limitation for KNIME AP from 1024 Megabytes (Mb) to 64 Gigabytes (Gb).\n\n\n\n\n\n\n\nNote\n\n\n\nYou should change the setting according to the RAM available on your computer. On the guide above 64 is used because my laptop installed with 64Gb RAM.",
-    "crumbs": [
-      "The Building Block",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with KNIME for Geospatial Analytics</span>"
-    ]
-  },
-  {
-    "objectID": "chap01.html#installing-geospatial-analytics-extension-of-knime-gaek",
-    "href": "chap01.html#installing-geospatial-analytics-extension-of-knime-gaek",
-    "title": "1  Getting Started with KNIME for Geospatial Analytics",
-    "section": "1.3 Installing Geospatial Analytics Extension of KNIME (GAEK)",
-    "text": "1.3 Installing Geospatial Analytics Extension of KNIME (GAEK)\nIn this section, you will learn how to install Geospatial Analytics Extension for KNIME (GAEK).\n\nLaunch KNIME.\n\nThe KNIME Analytics Platform Launcher dialog window appears and prompt you to select a directory as workspace.\n\n\nClick at the Browse button located on the right of the dialog window.\n\nThe Select Workspace Directory dialog window appears.\n\n\nSelect the newly created workspace folder. From the figure above, it will be GDSA-workspace.\nClick on Select Folder button.\n\nYou will return to KNIME Analytics Platform Launcher again.\n\n\nClick on Launch button.\n\nKNIME Workbench appears.\n\n\nFrom the upper right corner of the KNIME Workbench window, click on Menu.\n\n\n\nSelect Install extensions from the dropdown list.\n\nThe Install dialog window appears.\n\nSince we know the extension we would like to install (i.e. Geospatial Analytics Extension for KNIME), to allocate the extension, we can type the word Geospatial Analytics on the search pane as shown below.\n\nNotice that Geospatial Analytics Extension for KNIME appears on the search result pane.\n\nClick on the checkbox in front of Geospatial Analytics Extension for KNIME.\n\n\n\nClick on Next button.\n\nKNIME will start to download the extension.\nWhen the downloading is completed,\n\nClick on Finish button located on the bottom of the dialog window.\n\nKNIME will start to install the extension. Be patient, the installation will take a few minutes depend on how fast is your computer.\nNext KNIME will prompt you to restart the system.\n\n\nClick on Restart Now button.\n\nAfter a few seconds, KNIME workbench appears.\nIt is always a good practice to check if the extension has been installed properly.\n\nFrom the upper right menu of the workbench, click on Help.\n\n\n\nSelect About KNIME Analytics Platform from the dropdown list.\n\n\nThe About KNIME Analytics Platform window appears.\n\n\nClick on Installation Details button located at the bottom left corner of the window.\n\nThe KNIME Analytics Platform Installation Details appears.\n\nNotice that Geospatial Analytics Extension for KNIME is listed at the very top.\n\nClick on the Close button to close KNIME Analytics Platform Installation Details window.\n\nYou will return to The About KNIME Analytics Platform window window.\n\nClick on the Close button to close The About KNIME Analytics Platform window.\n\nCongratulations! You have installed KNIME and GAEK successfully!",
-    "crumbs": [
-      "The Building Block",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with KNIME for Geospatial Analytics</span>"
-    ]
-  },
-  {
-    "objectID": "chap01.html#installing-r-scrpting",
-    "href": "chap01.html#installing-r-scrpting",
-    "title": "1  Getting Started with KNIME for Geospatial Analytics",
-    "section": "1.4 Installing R Scrpting",
-    "text": "1.4 Installing R Scrpting",
-    "crumbs": [
-      "The Building Block",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting Started with KNIME for Geospatial Analytics</span>"
     ]
   }
 ]
