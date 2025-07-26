@@ -12,7 +12,7 @@ editor: visual
 
 ## Overview
 
-KNIME is a free and open-source data analytics and reporting platform that allows users to build and deploy data workflows using a visual, drag-and-drop interface. It is designed for both non-technical users and experienced data scientists, enabling them to access, blend, analyze, and visualize data without needing to write code. KNIME supports a wide range of data science and analytics tasks, from basic automation to advanced geospatial data analytics.
+[Konstanz Information Miner, KNIME](https://www.knime.com/) is a free and open-source data analytics and reporting platform that allows users to build and deploy data workflows using a visual, drag-and-drop interface. It is designed for both non-technical users and experienced data scientists, enabling them to access, blend, analyze, and visualize data without needing to write code. KNIME supports a wide range of data science and analytics tasks, from basic automation to advanced geospatial data analytics.
 
 The [**G**]{.underline}**eospatial [A]{.underline}nalytics [E]{.underline}xtension for [K]{.underline}NIME (GAEK)** is a visual programming tool that integrates geospatial analysis with KNIME Analytics Platform. It allows users to perform spatial data analysis and visualization without coding, using nodes for common geospatial tasks and data types. It was developed through a collaboration between the Center for Geographic Analysis at Harvard University and KNIME.Geospatial Analytics Extension of KNIME (GAEK)
 
@@ -163,10 +163,12 @@ The KNIME Analytics Platform Installation Details appears.
 
 Notice that Geospatial Analytics Extension for KNIME is listed at the very top.
 
-- Click on the **Close** button to close KNIME Analytics Platform Installation Details window.
+-   Click on the **Close** button to close KNIME Analytics Platform Installation Details window.
 
 You will return to The About KNIME Analytics Platform window window.
 
-- Click on the **Close** button to close The About KNIME Analytics Platform window. 
+-   Click on the **Close** button to close The About KNIME Analytics Platform window.
 
 Congratulations! You have installed KNIME and GAEK successfully!
+
+
