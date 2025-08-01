@@ -1,0 +1,489 @@
+---
+title: "Geospatial Data Science with GAEK"
+date: "24 January 2023"
+date-modified: "last-modified"
+format: html
+execute:
+  echo: true
+  eval: false
+  warning: false
+editor: visual 
+---
+
+## Learning Outcome
+
+Geospatial Data Science is a process of importing, wrangling, integrating, and processing geographically referenced data sets. In this hands-on exercise, you will learn how to perform geospatial data science tasks in KNIME by using GAEK.
+
+By the end of this hands-on exercise, you should acquire the following competencies by using KNIME and GAEK:
+
+-   importing geospatial data from different file formats such as ESRI shapefile, kml, and geojson,
+-   assigning or transforming coordinate systems,
+-   preparing and wrangling data,
+-   performing Euclidean distance calculation,
+-   visualising geographic distribution, and
+-   visualising numeric distribution.
+
+::: callout-note
+Students are encouraged to read the reference guide of each nodes, especially the input data requirements, options and output format, if any before using them.
+:::
+
+## The Case: Geography Accessibility of Eldercare Services in Singapore
+
+**Geographic accessibility** refers to the ease with which people can reach desired locations or services from a specific place, considering factors like distance, transportation options, and infrastructure. It essentially measures how well a location is connected to other places and the ease of travel to and from it.
+
+Singapore offers a range of eldercare services, but ensuring adequate and easy access for all seniors requires ongoing effort and innovation. While there's been expansion in areas like Active Ageing Centres and community-based services, challenges remain in affordability, awareness, and meeting diverse needs.
+
+This exercise aims to assess the geography accessibility of eldercare services in Singapore. Traditionally, the study will be performed by using Geographic Information Sysyems (GIS). In this exercise, you will learn how to perform the analysis by using KNIME and GAEK.
+
+## Methodology and Data
+
+### Methodology
+
+Figure below shows the workflow of the study based on KNIME and GAEK. It consists of 13 nodes. Some of the nodes are from KNIME such as Row Filter, GroupBy, Joiner, Missing Value and Histogram. The remaining nodes are specially designed for handling geospatial data sciences tasks under GAEK.
+
+![](chap02/images/img05.jpg)
+
+By and large, the nodes should be read sequencially by following the step numbers and the flow direction.
+
+### Data Acquisition
+
+Data are key to data analytics including geospatial analytics. Hence, before analysing, we need to assemble the necessary data. In this hands-on exercise, you are required to extract the necessary data sets from the following sources:
+
+-   HDB Existing Building from [data.gov.sg](https://data.gov.sg/). The kml version should be used.
+-   Eldercare Services from [data.gov.sg](https://data.gov.sg/). The ESRI shapefile version should be used.
+
+::: callout-note
+Although specific file formats are suggested to download, for the HDB Existing Building, there is also a geojson version and for the Eldercare Services, there are also geojson and kml versions. You are encouraged to examine and compare these different geospatial data formats.
+:::
+
+::: callout-important
+The purpose of this section is not merely extracting the necessary data sets. It also aims to introduce you to public available data sets. Students are encouraged to explore the rest of the available data sets in data.gov.sg.
+:::
+
+### Start KNIME
+
+We are ready to launch KNIME.
+
+-   Start KNIME and select *GDSA-workspace* directory as the workspace. If necessary, refer to to the instruction provides on Chapter 1 to create GDSA-workspace directory.
+
+![](chap02/images/img01.jpg)
+
+Your screen should look similar to the screenshot below.
+
+![](chap02/images/img02.jpg)
+
+-   From the left pane, click on **Local space**.
+-   From the right pane, click on the circle with a cross inside as shown below.
+
+![](chap02/images/img03.jpg)
+
+**Create a new workflow** dialog window appears.
+
+![](chap02/images/img04.jpg){width="335"}
+
+-   Type *Hands-on_Ex01* and click on Create button.
+
+A new workflow window called *Hands-on_Ex01* appears.
+
+### Preparing the Data Repository
+
+Next we will prepare the data repository of Hands-on Exercise 1.
+
+-   Using **Windows File Explorer** or **macOS Finder** to locate and open *Hands-on_Ex01* inside *GDSA-workspace* folder.
+-   Navigate into *Hands-on_Ex01* folder and create a new folder called *data*.
+-   Navigate into *data* folder and create two new sub-folders and name them *geospatial* and *aspatial* respectively.
+
+### Placing the downloaded files
+
+-   From *Downloads* folder of your computer, cut-and-paste the downloaded **Eldercare Services** and **HDB Existing Buildings** into the geospatial sub-folder.
+
+::: callout-warning
+For the zipped file, remember to unzip it then delete the zipped file.
+:::
+
+## The Geospatial Data Science Processes
+
+### Step 1: Importing HDB Existing Building data file
+
+In this step, **GeoFile Reader** node of GAEK will be used to import HDB Existing Building (i.e. *HDBExistingBuilding.kml*) into KNIME. GeoFile Reader node reads a single geospatial file from the provided local file path or URL. The supported file formats are the popular data types such as Shapefile (.shp), zipped Shapefiles(.zip) with a single Shapefile, single-layer Geopackage (.gpkg), GeoJSON (.geojson), GeoParquet, or MapInfo (.tab) files. In addition the node partially supports Keyhole Markup Language (.kml) files or single entry zipped .kmz files. For more details on the limitations when reading these files, please refer to Caveats section of [this page](https://gdal.org/en/stable/drivers/vector/kml.html#kml-reading).
+
+The node can also load geospatial file directly from a web URL, for example to load a GeoJSON file from geojson.xyz you would enter http://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_land.geojson.
+
+::: callout-note
+For larger files the node progress might not change for a time until the file is successfully read.
+:::
+
+-   Return to KNIME.
+-   From the left pane, click on **Nodes**.
+
+**Nodes** pane appears as shown below.
+
+![](chap02/images/img06.jpg){width="422"}
+
+-   From the **Nodes** pane, click on **Community Nodes** -\> **Geospatial Analytics** -\> **Spatial IO**.
+-   Double-click on `GeoFile Reader`.
+
+![](chap02/images/img07.jpg){width="276"}
+
+Notice that `GeoFile Reader` node has been added onto the work flow window.
+
+![](chap02/images/img08.jpg)
+
+-   From the dialog window of `GeoFile Reader`, click on ![](chap02/images/img09.jpg){width="36"}.
+
+-   Navigate until *HDBExistingBuilding.kml* is found then click on the file.
+
+![](chap02/images/img10.jpg){width="480"}
+
+-   Click on **Choose file**.
+
+The display will return to `GeoFile Reader` dialog window.
+
+![](chap02/images/img11.jpg){width="480"}
+
+-   Click on **Apply and Execute** button.
+
+When the file is loaded completely into KNIME, the data table will appear as shown below.
+
+![](chap02/images/img12.jpg)
+
+::: callout-tip
+Examine the data table closely. Which field contains spatial object information? What is the spatial object of this geospatial data?
+:::
+
+### Step 2: Transforming projection
+
+In this step, `Projection` node of GAEK will be used to transform the projection of *HDBExistingBuilding* data from WGS 84 to SVY21.
+
+::: calout-note
+[SVY21](https://app.sla.gov.sg/sirent/About/PlaneCoordinateSystem#:~:text=%22SVY%2021%22%20is%20a%20geodetic,Latitude) is Singapore's official plane coordinate system, based on the Transverse Mercator projection and the WGS 84 ellipsoid. It's used for mapping, surveying, and defining property boundaries. Essentially, it provides a standardized way to represent locations in Singapore using easting and northing coordinates. Unlike WGS 84, the unit of measurement of SVY 21 is in metre and not decimal degree.
+:::
+
+-   From left menu, click on **Nodes**.
+-   At the Nodes pane, click on **Community Nodes** -\> **Geospatial Analytics** -\> **Spatial Transformation**.
+-   Double-click on `Projection`.
+
+![](chap02/images/img13.jpg){width="450"}
+
+-   At the `Projection` pane (refer to the right of KNIME Window), for **New CRS**, type **epsg:3414**.
+
+![](chap02/images/img14.jpg){width="450"}
+
+-   Click on **Apply and Execute** button located at the bottom of `Project` pane.
+
+Notice that the geometry is in [EPSG: 3414](https://epsg.io/3414) which is the code for SVY 21.
+
+![](chap02/images/img15.jpg)
+
+### Step 3: Computing polygon centroid
+
+In *HDBExistingBuilding* data, polygon feature is used to represent the footprint of HDB building as shown below.
+
+![](chap02/images/img16.jpg)
+
+The polygon features provide cartographic quality outlines of HDB building but it is not useful for computing distance matrix between the HDB building and eldercare service. In view of this, centroid of the polygon feature will be used.
+
+In GIS, a centroid represents the geometric center of a polygon feature, and is often used as a point of reference for that feature. It can be thought of as the "average" location of all points within the feature. For polygons, the centroid is often visualized as the balancing point of the shape if it were a physical object as shown below.
+
+![](chap02/images/img17.jpg)
+
+In this step, `Geometry To Point` node of GAEK will be used to compute the centroid of HDB Exlisting Building.
+
+-   From left menu, click on **Nodes**.
+-   At the **Nodes** pane, click on **Community Nodes** -\> **Geospatial Analytics** -\> **Spatial Transformation**.
+-   Double-click on `Geometry To Point`.
+
+![](chap02/images/img18.jpg){width="350"}
+
+-   On the `Geometry To Point` node pane, complete the selections as shown below.
+
+![](chap02/images/img19.jpg){width="400"}
+
+-   Click on **Apply and Execute** button to run the node.
+
+::: callout-tip
+There are two types of points, **centroids** and **representative points**. The latter is guaranteed to be within each geometry. The node is based on the GeoPandas project and uses the following related information and functions:
+
+-   [GeoSeries.representative_point](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.representative_point.html#)
+-   [GeoSeries.centroid](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.centroid.html)
+:::
+
+Notice that a new point geometry column called Centroid has been added in *HDBExistingBuilding* data table.
+
+![](chap02/images/img20.jpg)
+
+### Step 4: Importing ELDERCARE data
+
+::: callout-note
+#### DIY
+
+Using the steps you learned earlier, import *ELDERCARE* data into KNIME. Note that the data is stored in ESRI shapefile format.
+:::
+
+### Step 5: Transforming projection
+
+::: callout-note
+#### DIY
+
+Using the steps you learned earlier, transform the data from WGS 84 geographic coordinates system to SVY21 projected coordinates system.
+:::
+
+### Step 6: Computing Euclidean distance
+
+In geoprocessing , Euclidean distance refers to the straight-line distance between two points, calculated using the Pythagorean theorem. It's a fundamental way to measure spatial separation, often used as a starting point for more complex spatial analyses.
+
+In this step, `Euclidean Distance` node of GAEK will be used to calculate the straight-line distance between the centroid of HDB Existing Building and the eldercare. The node is based on [GeoSeries.distance](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.distance.html) of GeoPandas.
+
+-   From left menu, click on **Nodes**.
+-   At the **Nodes** pane, click on **Community Nodes** -\> **Geospatial Analytics** -\> **Spatial Manipulation**.
+-   Double-click on `Euclidean Distance`.
+
+![](chap02/images/img21.jpg){width="350"}
+
+-   On the `Euclidean Distance` node pane, complete the selections as shown below.
+
+![](chap02/images/img22.jpg){width="350"}
+
+-   Click on **Apply and Execute** button to run the node.
+
+The output of `Euclidean Distance` node is a data table with 5 columns and 1708651 as shown below.
+
+![](chap02/images/img23.jpg)
+
+::: callout-tip
+### Quiz
+
+-   Do you know why there are a total of 1708651 rows?
+-   What is the unit of measurement of the values in Distance column?
+:::
+
+### Step 7: Selecting distance within 2.5km
+
+In this step, Row Filter node of KNIME will be used to select origin-and-destination pairs with distance less than or equal to 2.5km.
+
+-   From left menu, click on **Nodes**.
+-   At the **Nodes** pane, click on **Manipulation** -\> **Row** -\> **Filter**.
+-   Double-click on `Row Filter`.
+
+![](chap02/images/img24.jpg){width="380"}
+
+-   On the `Row Filter` node pane, complete the selections as shown below.
+
+![](chap02/images/img25.jpg){width="380"}
+
+-   Click on **Apply** button then follow up clicking on **Execute** button.
+
+Notice that there are only 99892 rows in the output data table.
+
+![](chap02/images/img26.jpg)
+
+-   Click on *Distance* column and verify that the distance values are within the range of 0 and 2500.
+
+### Step 8: Point-in-Polygon Count
+
+In this step, we are going to use `GroupBy` node of KNIME to count the number of eldercare found within 2.5km of HDB existing building.
+
+-   At the left pane, click on **Nodes**.
+-   From the **Nodes** pane, click on **Manipulation** -\> **Row** -\> **Transform**.
+-   Double-click on `GroupBy`.
+
+![](chap02/images/img27.jpg){width="350"}
+
+-   From the right pane, click on **Open dialog** button.
+
+The `GroupBy` dialog window appears.
+
+![](chap02/images/img28.jpg)
+
+By default, **Group tab** will be selected.
+
+The dialog window reveals that *Origin ID* is the only **Group By** field.
+
+Next,
+
+-   click on **Manual Aggregation** tab.
+-   At the **Available columns** pane, click on *Destination ID*.
+-   At the **Select** pane, click on **add \>\>**.
+
+![](chap02/images/img29.jpg)
+
+-   From Aggregation (click to change) column of the right pane, select Count from the drop-down list.
+
+![](chap02/images/img30.jpg)
+
+-   Click on **Apply**, follow by **Ok** button.
+
+The GroupBy dialog window closes.
+
+-   From GroupBy output dialog pane, click on the **Execute** button to run the node.
+
+![](chap02/images/img31.jpg)
+
+::: callout-note
+Note that the output table consists of 12368 rows and 2 columns.
+:::
+
+![](chap02/images/img32.jpg){width="400"}
+
+The table above reveals that not all HDB existing buildings have eldercare within 2.5km.
+
+### Step 9: Joining
+
+In this step, `Joiner` node of KNIME will be used to append columns output from GroupBy node to HDB Existing Building data table.
+
+-   From the left pane, click on **Nodes**.
+-   At the **Nodes** pane, select **Manipulation** -\> **Column** -\> **Split & Combine**.
+-   Double-click on `Joiner`.
+
+![](chap02/images/img33.jpg){width="380"}
+
+-   From **Joiner** pane located on the right of the window complete the input under **Matching Criteria** pane as shown below:
+
+![](chap02/images/img34.jpg){width="380"}
+
+-   Next, scroll downward until **Include in Output** pane appears.
+
+-   Click on the chekboxes in front of **Matching rows** and **Left unmatched rows**.
+
+![](chap02/images/img35.jpg){width="380"}
+
+-   Scroll further downward until **Output Columns** pane.
+-   Keep *BLK_NO*, *ST_COD*, *POSTAL_COD* and *geometry* in the Includes list.
+
+![](chap02/images/img36.jpg){width="380"}
+
+-   Keep the rest of the default selection.
+-   Click on **Apply** button, follow by **Execute** button.
+
+### Step 10: Selecting HDB building located beyond 2.5km of eldercare
+
+::: callout-note
+### DIY
+
+Using the step you learned earlier, select HDB buildings do not have eldercare within 2.5km.
+:::
+
+The output table should look similar to the screenshot below. There should 479 HDB Buildings without eldercare within 2.5km.
+
+![](chap02/images/img37.jpg)
+
+### Step 11: Visualising geographical distribution
+
+In this step, we are interested to find out if there is any geographical bias in term of the availability of eldercare. The objective can be addressed by using Geospatial View node of GAEK.
+
+-   From the left pane, click on **Nodes**.
+-   From **Nodes** pane, click on **Community Nodes** -\> **Geospatial Analytics** -\> **Spatial Visualization**.
+-   Double-click on `Geospatial View`.
+
+![](chap02/images/img38.jpg){width="350"}
+
+-   Refer to **Geospatial View** pane located on the right of the window, for **Geometry column**, select *geometry* from the drop-down list.
+
+![](chap02/images/img39.jpg){width="350"}
+
+-   Keep the rest of the selections as default.
+-   At the bottom of **Geospatial View** pane, click on **Apply and Execute** button.
+
+Your screen should look similar to the screenshot below.
+
+![](chap02/images/img40.jpg)
+
+The map shows clear sign of geographic bias in term of availability of eldercare in the country.
+
+### Step 12: Replacing missing values
+
+To address the second research objective, we will need to replace missing values in the Count(Destination ID) column to 0 first. This is going to perform by using `Missing Value` node of KNIME.
+
+![](chap02/images/img41.jpg)
+
+-   From the left pane, click on **Nodes**.
+-   From **Nodes** pane, click on **Manipulation** -\> **Column** -\> **Transform**.
+-   Double click on `Missing Value` node.
+
+![](chap02/images/img42.jpg){width="350"}
+
+-   From the right pane, click on **Open dialog** button.
+
+The `Missing Value` dialog window appears.
+
+-   Click on **Column Settings** tab.
+-   From the **Column Search** pane, double-click on *Count(Destination ID)*.
+-   Select **Fix Value** from the drop-down list.
+-   Make sure that **Value** is **0**.
+
+![](chap02/images/img43.jpg)
+
+-   Click on **Apply** button, then follow by **OK** button.
+
+The **Missing Value** dialog window closes.
+
+-   Click on **Execute** button to run the node.
+
+Note that all missing values in column *Count(Destination ID)* have been replaced with **0** as shown below.
+
+![](chap02/images/img44.jpg)
+
+### Step 13: Visualising numerical distribution
+
+In this last step, `Histogram` node of KNIME will be used to display the distribution of values in **Count(Destination ID)** column.
+
+-   From the left pane, click on **Nodes**.
+-   From the **Nodes** pane, click on **Views** -\> **Visualization Column Appender**.
+-   Double-click on `Histogram` node.
+
+![](chap02/images/img45.jpg){width="350"}
+
+The `Histogram` pane appears on the right of KNIME workbench window as shown below.
+
+-   For **Dimension**, select the target variable you want to plot, in this case *Count(Destination ID)*.
+
+::: callout-note
+Note that the variable must be either integer or ratio scale.
+:::
+
+-   For **Binning Type**, click on the radio button in front of **Equal width**.
+
+::: callout-tip
+### Quiz
+
+Do you know what are the differences between these three options?
+:::
+
+-   For **No. bins**, type **28**.
+
+::: callout-tip
+### Quiz
+
+Do you know why 28?
+:::
+
+![](chap02/images/img46.jpg){width="350"}
+
+::: callout-note
+There are many addition configuration options. You are encouraged to explore them. However, for this step, we will keep the rest of them as default.
+:::
+
+Before running the node,
+
+-   click on **Apply** button.
+
+Then, to run the node,
+
+-   click on **Execute** button.
+
+When the green light of Histogram light-up, the histogram will be displayed on the view window at the bottom of KNIME workbench as shown below.
+
+![](chap02/images/img47.jpg)
+
+::: callout-important
+### Quiz
+
+Examine the distributions reveal by the histogram and describe the distribution statistically.
+:::
+
+```{r}
+#| echo: false
+#| eval: false
+renderthis::to_pdf(from = "https://r4gdsa.netlify.app/chap02.html",
+                   to = "D://IS415_AY2022-23T2/03-Hands-on_Exercise/Hands-on_Ex1a.pdf")
+```

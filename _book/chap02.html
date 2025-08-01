@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2023-01-24">
+
+<title>2&nbsp; Geospatial Data Science with GAEK – Geospatial Data Science and Analytics with KNIME and GAEK</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chap03.html" rel="next">
+<link href="./chap01.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-364982630eef5352dd1537128a8ed5cb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chap01.html">The Building Block</a></li><li class="breadcrumb-item"><a href="./chap02.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Geospatial Data Science with GAEK</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Geospatial Data Science and Analytics with KNIME and GAEK</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">The Building Block</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with KNIME for Geospatial Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap02.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Geospatial Data Science with GAEK</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Thematic Mapping and GeoVisualisation with R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Spatial Point Patterns Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">1st Order Spatial Point Patterns Analysis Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2nd Order Spatial Point Patterns Analysis Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Spatiotemporal Point Patterns Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Network Constrained Spatial Point Patterns Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Spatial Weights and Applications</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Spatial Weights and Applications</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Global Measures of Spatial Autocorrelation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Local Measures of Spatial Autocorrelation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Geospatial Multivariate Data Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Geographically Weighted PCA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Geographical Segmentation with Spatially Constrained Clustering Techniques</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Geographically Weighted Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Calibrating Hedonic Pricing Model for Private Highrise Property with GWR Method</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Geographically Weighted Predictive Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Modelling Spatial Interaction and Flows</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Processing and Visualising Flow Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Calibrating Spatial Interaction Models with R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap17.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Modelling Geographical Accessibility</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link active" data-scroll-target="#learning-outcome"><span class="header-section-number">2.1</span> Learning Outcome</a></li>
+  <li><a href="#the-case-geography-accessibility-of-eldercare-services-in-singapore" id="toc-the-case-geography-accessibility-of-eldercare-services-in-singapore" class="nav-link" data-scroll-target="#the-case-geography-accessibility-of-eldercare-services-in-singapore"><span class="header-section-number">2.2</span> The Case: Geography Accessibility of Eldercare Services in Singapore</a></li>
+  <li><a href="#methodology-and-data" id="toc-methodology-and-data" class="nav-link" data-scroll-target="#methodology-and-data"><span class="header-section-number">2.3</span> Methodology and Data</a>
+  <ul>
+  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology"><span class="header-section-number">2.3.1</span> Methodology</a></li>
+  <li><a href="#data-acquisition" id="toc-data-acquisition" class="nav-link" data-scroll-target="#data-acquisition"><span class="header-section-number">2.3.2</span> Data Acquisition</a></li>
+  <li><a href="#start-knime" id="toc-start-knime" class="nav-link" data-scroll-target="#start-knime"><span class="header-section-number">2.3.3</span> Start KNIME</a></li>
+  <li><a href="#preparing-the-data-repository" id="toc-preparing-the-data-repository" class="nav-link" data-scroll-target="#preparing-the-data-repository"><span class="header-section-number">2.3.4</span> Preparing the Data Repository</a></li>
+  <li><a href="#placing-the-downloaded-files" id="toc-placing-the-downloaded-files" class="nav-link" data-scroll-target="#placing-the-downloaded-files"><span class="header-section-number">2.3.5</span> Placing the downloaded files</a></li>
+  </ul></li>
+  <li><a href="#the-geospatial-data-science-processes" id="toc-the-geospatial-data-science-processes" class="nav-link" data-scroll-target="#the-geospatial-data-science-processes"><span class="header-section-number">2.4</span> The Geospatial Data Science Processes</a>
+  <ul>
+  <li><a href="#step-1-importing-hdb-existing-building-data-file" id="toc-step-1-importing-hdb-existing-building-data-file" class="nav-link" data-scroll-target="#step-1-importing-hdb-existing-building-data-file"><span class="header-section-number">2.4.1</span> Step 1: Importing HDB Existing Building data file</a></li>
+  <li><a href="#step-2-transforming-projection" id="toc-step-2-transforming-projection" class="nav-link" data-scroll-target="#step-2-transforming-projection"><span class="header-section-number">2.4.2</span> Step 2: Transforming projection</a></li>
+  <li><a href="#step-3-computing-polygon-centroid" id="toc-step-3-computing-polygon-centroid" class="nav-link" data-scroll-target="#step-3-computing-polygon-centroid"><span class="header-section-number">2.4.3</span> Step 3: Computing polygon centroid</a></li>
+  <li><a href="#step-4-importing-eldercare-data" id="toc-step-4-importing-eldercare-data" class="nav-link" data-scroll-target="#step-4-importing-eldercare-data"><span class="header-section-number">2.4.4</span> Step 4: Importing ELDERCARE data</a></li>
+  <li><a href="#step-5-transforming-projection" id="toc-step-5-transforming-projection" class="nav-link" data-scroll-target="#step-5-transforming-projection"><span class="header-section-number">2.4.5</span> Step 5: Transforming projection</a></li>
+  <li><a href="#step-6-computing-euclidean-distance" id="toc-step-6-computing-euclidean-distance" class="nav-link" data-scroll-target="#step-6-computing-euclidean-distance"><span class="header-section-number">2.4.6</span> Step 6: Computing Euclidean distance</a></li>
+  <li><a href="#step-7-selecting-distance-within-2.5km" id="toc-step-7-selecting-distance-within-2.5km" class="nav-link" data-scroll-target="#step-7-selecting-distance-within-2.5km"><span class="header-section-number">2.4.7</span> Step 7: Selecting distance within 2.5km</a></li>
+  <li><a href="#step-8-point-in-polygon-count" id="toc-step-8-point-in-polygon-count" class="nav-link" data-scroll-target="#step-8-point-in-polygon-count"><span class="header-section-number">2.4.8</span> Step 8: Point-in-Polygon Count</a></li>
+  <li><a href="#step-9-joining" id="toc-step-9-joining" class="nav-link" data-scroll-target="#step-9-joining"><span class="header-section-number">2.4.9</span> Step 9: Joining</a></li>
+  <li><a href="#step-10-selecting-hdb-building-located-beyond-2.5km-of-eldercare" id="toc-step-10-selecting-hdb-building-located-beyond-2.5km-of-eldercare" class="nav-link" data-scroll-target="#step-10-selecting-hdb-building-located-beyond-2.5km-of-eldercare"><span class="header-section-number">2.4.10</span> Step 10: Selecting HDB building located beyond 2.5km of eldercare</a></li>
+  <li><a href="#step-11-visualising-geographical-distribution" id="toc-step-11-visualising-geographical-distribution" class="nav-link" data-scroll-target="#step-11-visualising-geographical-distribution"><span class="header-section-number">2.4.11</span> Step 11: Visualising geographical distribution</a></li>
+  <li><a href="#step-12-replacing-missing-values" id="toc-step-12-replacing-missing-values" class="nav-link" data-scroll-target="#step-12-replacing-missing-values"><span class="header-section-number">2.4.12</span> Step 12: Replacing missing values</a></li>
+  <li><a href="#step-13-visualising-numerical-distribution" id="toc-step-13-visualising-numerical-distribution" class="nav-link" data-scroll-target="#step-13-visualising-numerical-distribution"><span class="header-section-number">2.4.13</span> Step 13: Visualising numerical distribution</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chap01.html">The Building Block</a></li><li class="breadcrumb-item"><a href="./chap02.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Geospatial Data Science with GAEK</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Geospatial Data Science with GAEK</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 24, 2023</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">August 1, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-outcome" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="learning-outcome"><span class="header-section-number">2.1</span> Learning Outcome</h2>
+<p>Geospatial Data Science is a process of importing, wrangling, integrating, and processing geographically referenced data sets. In this hands-on exercise, you will learn how to perform geospatial data science tasks in KNIME by using GAEK.</p>
+<p>By the end of this hands-on exercise, you should acquire the following competencies by using KNIME and GAEK:</p>
+<ul>
+<li>importing geospatial data from different file formats such as ESRI shapefile, kml, and geojson,</li>
+<li>assigning or transforming coordinate systems,</li>
+<li>preparing and wrangling data,</li>
+<li>performing Euclidean distance calculation,</li>
+<li>visualising geographic distribution, and</li>
+<li>visualising numeric distribution.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Students are encouraged to read the reference guide of each nodes, especially the input data requirements, options and output format, if any before using them.</p>
+</div>
+</div>
+</section>
+<section id="the-case-geography-accessibility-of-eldercare-services-in-singapore" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="the-case-geography-accessibility-of-eldercare-services-in-singapore"><span class="header-section-number">2.2</span> The Case: Geography Accessibility of Eldercare Services in Singapore</h2>
+<p><strong>Geographic accessibility</strong> refers to the ease with which people can reach desired locations or services from a specific place, considering factors like distance, transportation options, and infrastructure. It essentially measures how well a location is connected to other places and the ease of travel to and from it.</p>
+<p>Singapore offers a range of eldercare services, but ensuring adequate and easy access for all seniors requires ongoing effort and innovation. While there’s been expansion in areas like Active Ageing Centres and community-based services, challenges remain in affordability, awareness, and meeting diverse needs.</p>
+<p>This exercise aims to assess the geography accessibility of eldercare services in Singapore. Traditionally, the study will be performed by using Geographic Information Sysyems (GIS). In this exercise, you will learn how to perform the analysis by using KNIME and GAEK.</p>
+</section>
+<section id="methodology-and-data" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="methodology-and-data"><span class="header-section-number">2.3</span> Methodology and Data</h2>
+<section id="methodology" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="methodology"><span class="header-section-number">2.3.1</span> Methodology</h3>
+<p>Figure below shows the workflow of the study based on KNIME and GAEK. It consists of 13 nodes. Some of the nodes are from KNIME such as Row Filter, GroupBy, Joiner, Missing Value and Histogram. The remaining nodes are specially designed for handling geospatial data sciences tasks under GAEK.</p>
+<p><img src="chap02/images/img05.jpg" class="img-fluid"></p>
+<p>By and large, the nodes should be read sequencially by following the step numbers and the flow direction.</p>
+</section>
+<section id="data-acquisition" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="data-acquisition"><span class="header-section-number">2.3.2</span> Data Acquisition</h3>
+<p>Data are key to data analytics including geospatial analytics. Hence, before analysing, we need to assemble the necessary data. In this hands-on exercise, you are required to extract the necessary data sets from the following sources:</p>
+<ul>
+<li>HDB Existing Building from <a href="https://data.gov.sg/">data.gov.sg</a>. The kml version should be used.</li>
+<li>Eldercare Services from <a href="https://data.gov.sg/">data.gov.sg</a>. The ESRI shapefile version should be used.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Although specific file formats are suggested to download, for the HDB Existing Building, there is also a geojson version and for the Eldercare Services, there are also geojson and kml versions. You are encouraged to examine and compare these different geospatial data formats.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The purpose of this section is not merely extracting the necessary data sets. It also aims to introduce you to public available data sets. Students are encouraged to explore the rest of the available data sets in data.gov.sg.</p>
+</div>
+</div>
+</section>
+<section id="start-knime" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="start-knime"><span class="header-section-number">2.3.3</span> Start KNIME</h3>
+<p>We are ready to launch KNIME.</p>
+<ul>
+<li>Start KNIME and select <em>GDSA-workspace</em> directory as the workspace. If necessary, refer to to the instruction provides on Chapter 1 to create GDSA-workspace directory.</li>
+</ul>
+<p><img src="chap02/images/img01.jpg" class="img-fluid"></p>
+<p>Your screen should look similar to the screenshot below.</p>
+<p><img src="chap02/images/img02.jpg" class="img-fluid"></p>
+<ul>
+<li>From the left pane, click on <strong>Local space</strong>.</li>
+<li>From the right pane, click on the circle with a cross inside as shown below.</li>
+</ul>
+<p><img src="chap02/images/img03.jpg" class="img-fluid"></p>
+<p><strong>Create a new workflow</strong> dialog window appears.</p>
+<p><img src="chap02/images/img04.jpg" class="img-fluid" width="335"></p>
+<ul>
+<li>Type <em>Hands-on_Ex01</em> and click on Create button.</li>
+</ul>
+<p>A new workflow window called <em>Hands-on_Ex01</em> appears.</p>
+</section>
+<section id="preparing-the-data-repository" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="preparing-the-data-repository"><span class="header-section-number">2.3.4</span> Preparing the Data Repository</h3>
+<p>Next we will prepare the data repository of Hands-on Exercise 1.</p>
+<ul>
+<li>Using <strong>Windows File Explorer</strong> or <strong>macOS Finder</strong> to locate and open <em>Hands-on_Ex01</em> inside <em>GDSA-workspace</em> folder.</li>
+<li>Navigate into <em>Hands-on_Ex01</em> folder and create a new folder called <em>data</em>.</li>
+<li>Navigate into <em>data</em> folder and create two new sub-folders and name them <em>geospatial</em> and <em>aspatial</em> respectively.</li>
+</ul>
+</section>
+<section id="placing-the-downloaded-files" class="level3" data-number="2.3.5">
+<h3 data-number="2.3.5" class="anchored" data-anchor-id="placing-the-downloaded-files"><span class="header-section-number">2.3.5</span> Placing the downloaded files</h3>
+<ul>
+<li>From <em>Downloads</em> folder of your computer, cut-and-paste the downloaded <strong>Eldercare Services</strong> and <strong>HDB Existing Buildings</strong> into the geospatial sub-folder.</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For the zipped file, remember to unzip it then delete the zipped file.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="the-geospatial-data-science-processes" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="the-geospatial-data-science-processes"><span class="header-section-number">2.4</span> The Geospatial Data Science Processes</h2>
+<section id="step-1-importing-hdb-existing-building-data-file" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="step-1-importing-hdb-existing-building-data-file"><span class="header-section-number">2.4.1</span> Step 1: Importing HDB Existing Building data file</h3>
+<p>In this step, <strong>GeoFile Reader</strong> node of GAEK will be used to import HDB Existing Building (i.e.&nbsp;<em>HDBExistingBuilding.kml</em>) into KNIME. GeoFile Reader node reads a single geospatial file from the provided local file path or URL. The supported file formats are the popular data types such as Shapefile (.shp), zipped Shapefiles(.zip) with a single Shapefile, single-layer Geopackage (.gpkg), GeoJSON (.geojson), GeoParquet, or MapInfo (.tab) files. In addition the node partially supports Keyhole Markup Language (.kml) files or single entry zipped .kmz files. For more details on the limitations when reading these files, please refer to Caveats section of <a href="https://gdal.org/en/stable/drivers/vector/kml.html#kml-reading">this page</a>.</p>
+<p>The node can also load geospatial file directly from a web URL, for example to load a GeoJSON file from geojson.xyz you would enter http://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_land.geojson.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For larger files the node progress might not change for a time until the file is successfully read.</p>
+</div>
+</div>
+<ul>
+<li>Return to KNIME.</li>
+<li>From the left pane, click on <strong>Nodes</strong>.</li>
+</ul>
+<p><strong>Nodes</strong> pane appears as shown below.</p>
+<p><img src="chap02/images/img06.jpg" class="img-fluid" width="422"></p>
+<ul>
+<li>From the <strong>Nodes</strong> pane, click on <strong>Community Nodes</strong> -&gt; <strong>Geospatial Analytics</strong> -&gt; <strong>Spatial IO</strong>.</li>
+<li>Double-click on <code>GeoFile Reader</code>.</li>
+</ul>
+<p><img src="chap02/images/img07.jpg" class="img-fluid" width="276"></p>
+<p>Notice that <code>GeoFile Reader</code> node has been added onto the work flow window.</p>
+<p><img src="chap02/images/img08.jpg" class="img-fluid"></p>
+<ul>
+<li><p>From the dialog window of <code>GeoFile Reader</code>, click on <img src="chap02/images/img09.jpg" class="img-fluid" width="36">.</p></li>
+<li><p>Navigate until <em>HDBExistingBuilding.kml</em> is found then click on the file.</p></li>
+</ul>
+<p><img src="chap02/images/img10.jpg" class="img-fluid" width="480"></p>
+<ul>
+<li>Click on <strong>Choose file</strong>.</li>
+</ul>
+<p>The display will return to <code>GeoFile Reader</code> dialog window.</p>
+<p><img src="chap02/images/img11.jpg" class="img-fluid" width="480"></p>
+<ul>
+<li>Click on <strong>Apply and Execute</strong> button.</li>
+</ul>
+<p>When the file is loaded completely into KNIME, the data table will appear as shown below.</p>
+<p><img src="chap02/images/img12.jpg" class="img-fluid"></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Examine the data table closely. Which field contains spatial object information? What is the spatial object of this geospatial data?</p>
+</div>
+</div>
+</section>
+<section id="step-2-transforming-projection" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="step-2-transforming-projection"><span class="header-section-number">2.4.2</span> Step 2: Transforming projection</h3>
+<p>In this step, <code>Projection</code> node of GAEK will be used to transform the projection of <em>HDBExistingBuilding</em> data from WGS 84 to SVY21.</p>
+<div class="calout-note">
+<p><a href="https://app.sla.gov.sg/sirent/About/PlaneCoordinateSystem#:~:text=%22SVY%2021%22%20is%20a%20geodetic,Latitude">SVY21</a> is Singapore’s official plane coordinate system, based on the Transverse Mercator projection and the WGS 84 ellipsoid. It’s used for mapping, surveying, and defining property boundaries. Essentially, it provides a standardized way to represent locations in Singapore using easting and northing coordinates. Unlike WGS 84, the unit of measurement of SVY 21 is in metre and not decimal degree.</p>
+</div>
+<ul>
+<li>From left menu, click on <strong>Nodes</strong>.</li>
+<li>At the Nodes pane, click on <strong>Community Nodes</strong> -&gt; <strong>Geospatial Analytics</strong> -&gt; <strong>Spatial Transformation</strong>.</li>
+<li>Double-click on <code>Projection</code>.</li>
+</ul>
+<p><img src="chap02/images/img13.jpg" class="img-fluid" width="450"></p>
+<ul>
+<li>At the <code>Projection</code> pane (refer to the right of KNIME Window), for <strong>New CRS</strong>, type <strong>epsg:3414</strong>.</li>
+</ul>
+<p><img src="chap02/images/img14.jpg" class="img-fluid" width="450"></p>
+<ul>
+<li>Click on <strong>Apply and Execute</strong> button located at the bottom of <code>Project</code> pane.</li>
+</ul>
+<p>Notice that the geometry is in <a href="https://epsg.io/3414">EPSG: 3414</a> which is the code for SVY 21.</p>
+<p><img src="chap02/images/img15.jpg" class="img-fluid"></p>
+</section>
+<section id="step-3-computing-polygon-centroid" class="level3" data-number="2.4.3">
+<h3 data-number="2.4.3" class="anchored" data-anchor-id="step-3-computing-polygon-centroid"><span class="header-section-number">2.4.3</span> Step 3: Computing polygon centroid</h3>
+<p>In <em>HDBExistingBuilding</em> data, polygon feature is used to represent the footprint of HDB building as shown below.</p>
+<p><img src="chap02/images/img16.jpg" class="img-fluid"></p>
+<p>The polygon features provide cartographic quality outlines of HDB building but it is not useful for computing distance matrix between the HDB building and eldercare service. In view of this, centroid of the polygon feature will be used.</p>
+<p>In GIS, a centroid represents the geometric center of a polygon feature, and is often used as a point of reference for that feature. It can be thought of as the “average” location of all points within the feature. For polygons, the centroid is often visualized as the balancing point of the shape if it were a physical object as shown below.</p>
+<p><img src="chap02/images/img17.jpg" class="img-fluid"></p>
+<p>In this step, <code>Geometry To Point</code> node of GAEK will be used to compute the centroid of HDB Exlisting Building.</p>
+<ul>
+<li>From left menu, click on <strong>Nodes</strong>.</li>
+<li>At the <strong>Nodes</strong> pane, click on <strong>Community Nodes</strong> -&gt; <strong>Geospatial Analytics</strong> -&gt; <strong>Spatial Transformation</strong>.</li>
+<li>Double-click on <code>Geometry To Point</code>.</li>
+</ul>
+<p><img src="chap02/images/img18.jpg" class="img-fluid" width="350"></p>
+<ul>
+<li>On the <code>Geometry To Point</code> node pane, complete the selections as shown below.</li>
+</ul>
+<p><img src="chap02/images/img19.jpg" class="img-fluid" width="400"></p>
+<ul>
+<li>Click on <strong>Apply and Execute</strong> button to run the node.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are two types of points, <strong>centroids</strong> and <strong>representative points</strong>. The latter is guaranteed to be within each geometry. The node is based on the GeoPandas project and uses the following related information and functions:</p>
+<ul>
+<li><a href="https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.representative_point.html#">GeoSeries.representative_point</a></li>
+<li><a href="https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.centroid.html">GeoSeries.centroid</a></li>
+</ul>
+</div>
+</div>
+<p>Notice that a new point geometry column called Centroid has been added in <em>HDBExistingBuilding</em> data table.</p>
+<p><img src="chap02/images/img20.jpg" class="img-fluid"></p>
+</section>
+<section id="step-4-importing-eldercare-data" class="level3" data-number="2.4.4">
+<h3 data-number="2.4.4" class="anchored" data-anchor-id="step-4-importing-eldercare-data"><span class="header-section-number">2.4.4</span> Step 4: Importing ELDERCARE data</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using the steps you learned earlier, import <em>ELDERCARE</em> data into KNIME. Note that the data is stored in ESRI shapefile format.</p>
+</div>
+</div>
+</section>
+<section id="step-5-transforming-projection" class="level3" data-number="2.4.5">
+<h3 data-number="2.4.5" class="anchored" data-anchor-id="step-5-transforming-projection"><span class="header-section-number">2.4.5</span> Step 5: Transforming projection</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using the steps you learned earlier, transform the data from WGS 84 geographic coordinates system to SVY21 projected coordinates system.</p>
+</div>
+</div>
+</section>
+<section id="step-6-computing-euclidean-distance" class="level3" data-number="2.4.6">
+<h3 data-number="2.4.6" class="anchored" data-anchor-id="step-6-computing-euclidean-distance"><span class="header-section-number">2.4.6</span> Step 6: Computing Euclidean distance</h3>
+<p>In geoprocessing , Euclidean distance refers to the straight-line distance between two points, calculated using the Pythagorean theorem. It’s a fundamental way to measure spatial separation, often used as a starting point for more complex spatial analyses.</p>
+<p>In this step, <code>Euclidean Distance</code> node of GAEK will be used to calculate the straight-line distance between the centroid of HDB Existing Building and the eldercare. The node is based on <a href="https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.distance.html">GeoSeries.distance</a> of GeoPandas.</p>
+<ul>
+<li>From left menu, click on <strong>Nodes</strong>.</li>
+<li>At the <strong>Nodes</strong> pane, click on <strong>Community Nodes</strong> -&gt; <strong>Geospatial Analytics</strong> -&gt; <strong>Spatial Manipulation</strong>.</li>
+<li>Double-click on <code>Euclidean Distance</code>.</li>
+</ul>
+<p><img src="chap02/images/img21.jpg" class="img-fluid" width="350"></p>
+<ul>
+<li>On the <code>Euclidean Distance</code> node pane, complete the selections as shown below.</li>
+</ul>
+<p><img src="chap02/images/img22.jpg" class="img-fluid" width="350"></p>
+<ul>
+<li>Click on <strong>Apply and Execute</strong> button to run the node.</li>
+</ul>
+<p>The output of <code>Euclidean Distance</code> node is a data table with 5 columns and 1708651 as shown below.</p>
+<p><img src="chap02/images/img23.jpg" class="img-fluid"></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quiz
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Do you know why there are a total of 1708651 rows?</li>
+<li>What is the unit of measurement of the values in Distance column?</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="step-7-selecting-distance-within-2.5km" class="level3" data-number="2.4.7">
+<h3 data-number="2.4.7" class="anchored" data-anchor-id="step-7-selecting-distance-within-2.5km"><span class="header-section-number">2.4.7</span> Step 7: Selecting distance within 2.5km</h3>
+<p>In this step, Row Filter node of KNIME will be used to select origin-and-destination pairs with distance less than or equal to 2.5km.</p>
+<ul>
+<li>From left menu, click on <strong>Nodes</strong>.</li>
+<li>At the <strong>Nodes</strong> pane, click on <strong>Manipulation</strong> -&gt; <strong>Row</strong> -&gt; <strong>Filter</strong>.</li>
+<li>Double-click on <code>Row Filter</code>.</li>
+</ul>
+<p><img src="chap02/images/img24.jpg" class="img-fluid" width="380"></p>
+<ul>
+<li>On the <code>Row Filter</code> node pane, complete the selections as shown below.</li>
+</ul>
+<p><img src="chap02/images/img25.jpg" class="img-fluid" width="380"></p>
+<ul>
+<li>Click on <strong>Apply</strong> button then follow up clicking on <strong>Execute</strong> button.</li>
+</ul>
+<p>Notice that there are only 99892 rows in the output data table.</p>
+<p><img src="chap02/images/img26.jpg" class="img-fluid"></p>
+<ul>
+<li>Click on <em>Distance</em> column and verify that the distance values are within the range of 0 and 2500.</li>
+</ul>
+</section>
+<section id="step-8-point-in-polygon-count" class="level3" data-number="2.4.8">
+<h3 data-number="2.4.8" class="anchored" data-anchor-id="step-8-point-in-polygon-count"><span class="header-section-number">2.4.8</span> Step 8: Point-in-Polygon Count</h3>
+<p>In this step, we are going to use <code>GroupBy</code> node of KNIME to count the number of eldercare found within 2.5km of HDB existing building.</p>
+<ul>
+<li>At the left pane, click on <strong>Nodes</strong>.</li>
+<li>From the <strong>Nodes</strong> pane, click on <strong>Manipulation</strong> -&gt; <strong>Row</strong> -&gt; <strong>Transform</strong>.</li>
+<li>Double-click on <code>GroupBy</code>.</li>
+</ul>
+<p><img src="chap02/images/img27.jpg" class="img-fluid" width="350"></p>
+<ul>
+<li>From the right pane, click on <strong>Open dialog</strong> button.</li>
+</ul>
+<p>The <code>GroupBy</code> dialog window appears.</p>
+<p><img src="chap02/images/img28.jpg" class="img-fluid"></p>
+<p>By default, <strong>Group tab</strong> will be selected.</p>
+<p>The dialog window reveals that <em>Origin ID</em> is the only <strong>Group By</strong> field.</p>
+<p>Next,</p>
+<ul>
+<li>click on <strong>Manual Aggregation</strong> tab.</li>
+<li>At the <strong>Available columns</strong> pane, click on <em>Destination ID</em>.</li>
+<li>At the <strong>Select</strong> pane, click on <strong>add &gt;&gt;</strong>.</li>
+</ul>
+<p><img src="chap02/images/img29.jpg" class="img-fluid"></p>
+<ul>
+<li>From Aggregation (click to change) column of the right pane, select Count from the drop-down list.</li>
+</ul>
+<p><img src="chap02/images/img30.jpg" class="img-fluid"></p>
+<ul>
+<li>Click on <strong>Apply</strong>, follow by <strong>Ok</strong> button.</li>
+</ul>
+<p>The GroupBy dialog window closes.</p>
+<ul>
+<li>From GroupBy output dialog pane, click on the <strong>Execute</strong> button to run the node.</li>
+</ul>
+<p><img src="chap02/images/img31.jpg" class="img-fluid"></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that the output table consists of 12368 rows and 2 columns.</p>
+</div>
+</div>
+<p><img src="chap02/images/img32.jpg" class="img-fluid" width="400"></p>
+<p>The table above reveals that not all HDB existing buildings have eldercare within 2.5km.</p>
+</section>
+<section id="step-9-joining" class="level3" data-number="2.4.9">
+<h3 data-number="2.4.9" class="anchored" data-anchor-id="step-9-joining"><span class="header-section-number">2.4.9</span> Step 9: Joining</h3>
+<p>In this step, <code>Joiner</code> node of KNIME will be used to append columns output from GroupBy node to HDB Existing Building data table.</p>
+<ul>
+<li>From the left pane, click on <strong>Nodes</strong>.</li>
+<li>At the <strong>Nodes</strong> pane, select <strong>Manipulation</strong> -&gt; <strong>Column</strong> -&gt; <strong>Split &amp; Combine</strong>.</li>
+<li>Double-click on <code>Joiner</code>.</li>
+</ul>
+<p><img src="chap02/images/img33.jpg" class="img-fluid" width="380"></p>
+<ul>
+<li>From <strong>Joiner</strong> pane located on the right of the window complete the input under <strong>Matching Criteria</strong> pane as shown below:</li>
+</ul>
+<p><img src="chap02/images/img34.jpg" class="img-fluid" width="380"></p>
+<ul>
+<li><p>Next, scroll downward until <strong>Include in Output</strong> pane appears.</p></li>
+<li><p>Click on the chekboxes in front of <strong>Matching rows</strong> and <strong>Left unmatched rows</strong>.</p></li>
+</ul>
+<p><img src="chap02/images/img35.jpg" class="img-fluid" width="380"></p>
+<ul>
+<li>Scroll further downward until <strong>Output Columns</strong> pane.</li>
+<li>Keep <em>BLK_NO</em>, <em>ST_COD</em>, <em>POSTAL_COD</em> and <em>geometry</em> in the Includes list.</li>
+</ul>
+<p><img src="chap02/images/img36.jpg" class="img-fluid" width="380"></p>
+<ul>
+<li>Keep the rest of the default selection.</li>
+<li>Click on <strong>Apply</strong> button, follow by <strong>Execute</strong> button.</li>
+</ul>
+</section>
+<section id="step-10-selecting-hdb-building-located-beyond-2.5km-of-eldercare" class="level3" data-number="2.4.10">
+<h3 data-number="2.4.10" class="anchored" data-anchor-id="step-10-selecting-hdb-building-located-beyond-2.5km-of-eldercare"><span class="header-section-number">2.4.10</span> Step 10: Selecting HDB building located beyond 2.5km of eldercare</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using the step you learned earlier, select HDB buildings do not have eldercare within 2.5km.</p>
+</div>
+</div>
+<p>The output table should look similar to the screenshot below. There should 479 HDB Buildings without eldercare within 2.5km.</p>
+<p><img src="chap02/images/img37.jpg" class="img-fluid"></p>
+</section>
+<section id="step-11-visualising-geographical-distribution" class="level3" data-number="2.4.11">
+<h3 data-number="2.4.11" class="anchored" data-anchor-id="step-11-visualising-geographical-distribution"><span class="header-section-number">2.4.11</span> Step 11: Visualising geographical distribution</h3>
+<p>In this step, we are interested to find out if there is any geographical bias in term of the availability of eldercare. The objective can be addressed by using Geospatial View node of GAEK.</p>
+<ul>
+<li>From the left pane, click on <strong>Nodes</strong>.</li>
+<li>From <strong>Nodes</strong> pane, click on <strong>Community Nodes</strong> -&gt; <strong>Geospatial Analytics</strong> -&gt; <strong>Spatial Visualization</strong>.</li>
+<li>Double-click on <code>Geospatial View</code>.</li>
+</ul>
+<p><img src="chap02/images/img38.jpg" class="img-fluid" width="350"></p>
+<ul>
+<li>Refer to <strong>Geospatial View</strong> pane located on the right of the window, for <strong>Geometry column</strong>, select <em>geometry</em> from the drop-down list.</li>
+</ul>
+<p><img src="chap02/images/img39.jpg" class="img-fluid" width="350"></p>
+<ul>
+<li>Keep the rest of the selections as default.</li>
+<li>At the bottom of <strong>Geospatial View</strong> pane, click on <strong>Apply and Execute</strong> button.</li>
+</ul>
+<p>Your screen should look similar to the screenshot below.</p>
+<p><img src="chap02/images/img40.jpg" class="img-fluid"></p>
+<p>The map shows clear sign of geographic bias in term of availability of eldercare in the country.</p>
+</section>
+<section id="step-12-replacing-missing-values" class="level3" data-number="2.4.12">
+<h3 data-number="2.4.12" class="anchored" data-anchor-id="step-12-replacing-missing-values"><span class="header-section-number">2.4.12</span> Step 12: Replacing missing values</h3>
+<p>To address the second research objective, we will need to replace missing values in the Count(Destination ID) column to 0 first. This is going to perform by using <code>Missing Value</code> node of KNIME.</p>
+<p><img src="chap02/images/img41.jpg" class="img-fluid"></p>
+<ul>
+<li>From the left pane, click on <strong>Nodes</strong>.</li>
+<li>From <strong>Nodes</strong> pane, click on <strong>Manipulation</strong> -&gt; <strong>Column</strong> -&gt; <strong>Transform</strong>.</li>
+<li>Double click on <code>Missing Value</code> node.</li>
+</ul>
+<p><img src="chap02/images/img42.jpg" class="img-fluid" width="350"></p>
+<ul>
+<li>From the right pane, click on <strong>Open dialog</strong> button.</li>
+</ul>
+<p>The <code>Missing Value</code> dialog window appears.</p>
+<ul>
+<li>Click on <strong>Column Settings</strong> tab.</li>
+<li>From the <strong>Column Search</strong> pane, double-click on <em>Count(Destination ID)</em>.</li>
+<li>Select <strong>Fix Value</strong> from the drop-down list.</li>
+<li>Make sure that <strong>Value</strong> is <strong>0</strong>.</li>
+</ul>
+<p><img src="chap02/images/img43.jpg" class="img-fluid"></p>
+<ul>
+<li>Click on <strong>Apply</strong> button, then follow by <strong>OK</strong> button.</li>
+</ul>
+<p>The <strong>Missing Value</strong> dialog window closes.</p>
+<ul>
+<li>Click on <strong>Execute</strong> button to run the node.</li>
+</ul>
+<p>Note that all missing values in column <em>Count(Destination ID)</em> have been replaced with <strong>0</strong> as shown below.</p>
+<p><img src="chap02/images/img44.jpg" class="img-fluid"></p>
+</section>
+<section id="step-13-visualising-numerical-distribution" class="level3" data-number="2.4.13">
+<h3 data-number="2.4.13" class="anchored" data-anchor-id="step-13-visualising-numerical-distribution"><span class="header-section-number">2.4.13</span> Step 13: Visualising numerical distribution</h3>
+<p>In this last step, <code>Histogram</code> node of KNIME will be used to display the distribution of values in <strong>Count(Destination ID)</strong> column.</p>
+<ul>
+<li>From the left pane, click on <strong>Nodes</strong>.</li>
+<li>From the <strong>Nodes</strong> pane, click on <strong>Views</strong> -&gt; <strong>Visualization Column Appender</strong>.</li>
+<li>Double-click on <code>Histogram</code> node.</li>
+</ul>
+<p><img src="chap02/images/img45.jpg" class="img-fluid" width="350"></p>
+<p>The <code>Histogram</code> pane appears on the right of KNIME workbench window as shown below.</p>
+<ul>
+<li>For <strong>Dimension</strong>, select the target variable you want to plot, in this case <em>Count(Destination ID)</em>.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that the variable must be either integer or ratio scale.</p>
+</div>
+</div>
+<ul>
+<li>For <strong>Binning Type</strong>, click on the radio button in front of <strong>Equal width</strong>.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quiz
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do you know what are the differences between these three options?</p>
+</div>
+</div>
+<ul>
+<li>For <strong>No.&nbsp;bins</strong>, type <strong>28</strong>.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quiz
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do you know why 28?</p>
+</div>
+</div>
+<p><img src="chap02/images/img46.jpg" class="img-fluid" width="350"></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are many addition configuration options. You are encouraged to explore them. However, for this step, we will keep the rest of them as default.</p>
+</div>
+</div>
+<p>Before running the node,</p>
+<ul>
+<li>click on <strong>Apply</strong> button.</li>
+</ul>
+<p>Then, to run the node,</p>
+<ul>
+<li>click on <strong>Execute</strong> button.</li>
+</ul>
+<p>When the green light of Histogram light-up, the histogram will be displayed on the view window at the bottom of KNIME workbench as shown below.</p>
+<p><img src="chap02/images/img47.jpg" class="img-fluid"></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quiz
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Examine the distributions reveal by the histogram and describe the distribution statistically.</p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chap01.html" class="pagination-link" aria-label="Getting Started with KNIME for Geospatial Analytics">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with KNIME for Geospatial Analytics</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chap03.html" class="pagination-link" aria-label="Thematic Mapping and GeoVisualisation with R">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Thematic Mapping and GeoVisualisation with R</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
