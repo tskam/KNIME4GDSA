@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-07-31">
+
+<title>3&nbsp; Trade Area Analysis and GeoVisualisation – Geospatial Data Science and Analytics with KNIME and GAEK</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chap04.html" rel="next">
+<link href="./chap02.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-364982630eef5352dd1537128a8ed5cb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chap01.html">The Building Block</a></li><li class="breadcrumb-item"><a href="./chap03.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Trade Area Analysis and GeoVisualisation</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Geospatial Data Science and Analytics with KNIME and GAEK</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">The Building Block</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with KNIME for Geospatial Analytics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Geospatial Data Science with GAEK</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap03.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Trade Area Analysis and GeoVisualisation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Spatial Point Patterns Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">1st Order Spatial Point Patterns Analysis Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2nd Order Spatial Point Patterns Analysis Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Spatiotemporal Point Patterns Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Network Constrained Spatial Point Patterns Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Spatial Weights and Applications</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Spatial Weights and Applications</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Global Measures of Spatial Autocorrelation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Local Measures of Spatial Autocorrelation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Geospatial Multivariate Data Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Geographically Weighted PCA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Geographical Segmentation with Spatially Constrained Clustering Techniques</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Geographically Weighted Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Calibrating Hedonic Pricing Model for Private Highrise Property with GWR Method</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Geographically Weighted Predictive Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Modelling Spatial Interaction and Flows</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Processing and Visualising Flow Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap16.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Calibrating Spatial Interaction Models with R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chap17.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Modelling Geographical Accessibility</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link active" data-scroll-target="#learning-outcomes"><span class="header-section-number">3.1</span> Learning Outcomes</a></li>
+  <li><a href="#trade-area-analysis-xbs-case-study" id="toc-trade-area-analysis-xbs-case-study" class="nav-link" data-scroll-target="#trade-area-analysis-xbs-case-study"><span class="header-section-number">3.2</span> Trade Area Analysis: XBS Case Study</a>
+  <ul>
+  <li><a href="#setting-the-scene" id="toc-setting-the-scene" class="nav-link" data-scroll-target="#setting-the-scene"><span class="header-section-number">3.2.1</span> Setting the Scene</a></li>
+  <li><a href="#what-is-trade-area-analysis" id="toc-what-is-trade-area-analysis" class="nav-link" data-scroll-target="#what-is-trade-area-analysis"><span class="header-section-number">3.2.2</span> What is Trade Area Analysis</a></li>
+  <li><a href="#framing-the-problem-and-collecting-the-data" id="toc-framing-the-problem-and-collecting-the-data" class="nav-link" data-scroll-target="#framing-the-problem-and-collecting-the-data"><span class="header-section-number">3.2.3</span> Framing the Problem and Collecting the Data</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="header-section-number">3.2.4</span> Getting Started</a></li>
+  <li><a href="#the-analytics-workflow" id="toc-the-analytics-workflow" class="nav-link" data-scroll-target="#the-analytics-workflow"><span class="header-section-number">3.2.5</span> The Analytics Workflow</a></li>
+  </ul></li>
+  <li><a href="#importing-and-wrangling-geospatial-data" id="toc-importing-and-wrangling-geospatial-data" class="nav-link" data-scroll-target="#importing-and-wrangling-geospatial-data"><span class="header-section-number">3.3</span> Importing and Wrangling Geospatial Data</a>
+  <ul>
+  <li><a href="#step-1-importing-banking-data" id="toc-step-1-importing-banking-data" class="nav-link" data-scroll-target="#step-1-importing-banking-data"><span class="header-section-number">3.3.1</span> Step 1: Importing banking data</a></li>
+  <li><a href="#step-2-transforming-projection" id="toc-step-2-transforming-projection" class="nav-link" data-scroll-target="#step-2-transforming-projection"><span class="header-section-number">3.3.2</span> Step 2: Transforming projection</a></li>
+  <li><a href="#step-3-extracting-xbs-branches" id="toc-step-3-extracting-xbs-branches" class="nav-link" data-scroll-target="#step-3-extracting-xbs-branches"><span class="header-section-number">3.3.3</span> Step 3: Extracting XBS branches</a></li>
+  <li><a href="#step-4-visualising-xbs-branche-locations" id="toc-step-4-visualising-xbs-branche-locations" class="nav-link" data-scroll-target="#step-4-visualising-xbs-branche-locations"><span class="header-section-number">3.3.4</span> Step 4: Visualising XBS branche locations</a></li>
+  <li><a href="#step-5-importing-singapore-outline-layer" id="toc-step-5-importing-singapore-outline-layer" class="nav-link" data-scroll-target="#step-5-importing-singapore-outline-layer"><span class="header-section-number">3.3.5</span> Step 5: Importing Singapore outline layer</a></li>
+  <li><a href="#step-6-visualising-coastaloutline-layer" id="toc-step-6-visualising-coastaloutline-layer" class="nav-link" data-scroll-target="#step-6-visualising-coastaloutline-layer"><span class="header-section-number">3.3.6</span> Step 6: Visualising CoastalOutline layer</a></li>
+  <li><a href="#step-7-preparing-singapore-outline-layer" id="toc-step-7-preparing-singapore-outline-layer" class="nav-link" data-scroll-target="#step-7-preparing-singapore-outline-layer"><span class="header-section-number">3.3.7</span> Step 7: Preparing Singapore outline layer</a></li>
+  <li><a href="#step-8-visualising-the-processed-coastaloutline-layer" id="toc-step-8-visualising-the-processed-coastaloutline-layer" class="nav-link" data-scroll-target="#step-8-visualising-the-processed-coastaloutline-layer"><span class="header-section-number">3.3.8</span> Step 8: Visualising the processed CoastalOutline layer</a></li>
+  <li><a href="#step-9-importing-smes-data" id="toc-step-9-importing-smes-data" class="nav-link" data-scroll-target="#step-9-importing-smes-data"><span class="header-section-number">3.3.9</span> Step 9: Importing SMEs data</a></li>
+  <li><a href="#step-10-visualising-smes-data" id="toc-step-10-visualising-smes-data" class="nav-link" data-scroll-target="#step-10-visualising-smes-data"><span class="header-section-number">3.3.10</span> Step 10: Visualising SMEs data</a></li>
+  <li><a href="#step-11-cleaning-smes-data" id="toc-step-11-cleaning-smes-data" class="nav-link" data-scroll-target="#step-11-cleaning-smes-data"><span class="header-section-number">3.3.11</span> Step 11: Cleaning SMEs data</a></li>
+  <li><a href="#step-12-visualising-the-cleaned-smes-data" id="toc-step-12-visualising-the-cleaned-smes-data" class="nav-link" data-scroll-target="#step-12-visualising-the-cleaned-smes-data"><span class="header-section-number">3.3.12</span> Step 12: Visualising the cleaned SMEs data</a></li>
+  </ul></li>
+  <li><a href="#delineating-trade-areas-with-geoprocessing-methods" id="toc-delineating-trade-areas-with-geoprocessing-methods" class="nav-link" data-scroll-target="#delineating-trade-areas-with-geoprocessing-methods"><span class="header-section-number">3.4</span> Delineating Trade Areas with Geoprocessing Methods</a>
+  <ul>
+  <li><a href="#step-13-creating-dissolving-buffers" id="toc-step-13-creating-dissolving-buffers" class="nav-link" data-scroll-target="#step-13-creating-dissolving-buffers"><span class="header-section-number">3.4.1</span> Step 13: Creating dissolving buffers</a></li>
+  <li><a href="#step-14-visualising-the-dissolving-buffers" id="toc-step-14-visualising-the-dissolving-buffers" class="nav-link" data-scroll-target="#step-14-visualising-the-dissolving-buffers"><span class="header-section-number">3.4.2</span> Step 14: Visualising the dissolving buffers</a></li>
+  <li><a href="#step-15-creating-voronoi-polygons" id="toc-step-15-creating-voronoi-polygons" class="nav-link" data-scroll-target="#step-15-creating-voronoi-polygons"><span class="header-section-number">3.4.3</span> Step 15: Creating voronoi polygons</a></li>
+  <li><a href="#step-16-visualising-voronoi-polygons" id="toc-step-16-visualising-voronoi-polygons" class="nav-link" data-scroll-target="#step-16-visualising-voronoi-polygons"><span class="header-section-number">3.4.4</span> Step 16: Visualising voronoi polygons</a></li>
+  <li><a href="#step-17-tidying-trade-areas" id="toc-step-17-tidying-trade-areas" class="nav-link" data-scroll-target="#step-17-tidying-trade-areas"><span class="header-section-number">3.4.5</span> Step 17: Tidying trade areas</a></li>
+  <li><a href="#step-18-visualising-the-tidied-trade-areas" id="toc-step-18-visualising-the-tidied-trade-areas" class="nav-link" data-scroll-target="#step-18-visualising-the-tidied-trade-areas"><span class="header-section-number">3.4.6</span> Step 18: Visualising the tidied trade areas</a></li>
+  </ul></li>
+  <li><a href="#analysing-with-trade-areas" id="toc-analysing-with-trade-areas" class="nav-link" data-scroll-target="#analysing-with-trade-areas"><span class="header-section-number">3.5</span> Analysing with trade areas</a>
+  <ul>
+  <li><a href="#step-19-allocating-smes-to-trade-areas" id="toc-step-19-allocating-smes-to-trade-areas" class="nav-link" data-scroll-target="#step-19-allocating-smes-to-trade-areas"><span class="header-section-number">3.5.1</span> Step 19: Allocating SMEs to trade areas</a></li>
+  <li><a href="#step-20-counting-numbers-of-sme-in-each-trade-area" id="toc-step-20-counting-numbers-of-sme-in-each-trade-area" class="nav-link" data-scroll-target="#step-20-counting-numbers-of-sme-in-each-trade-area"><span class="header-section-number">3.5.2</span> Step 20: Counting numbers of SME in each trade area</a></li>
+  <li><a href="#step-21-updating-the-trade-areas-layer" id="toc-step-21-updating-the-trade-areas-layer" class="nav-link" data-scroll-target="#step-21-updating-the-trade-areas-layer"><span class="header-section-number">3.5.3</span> Step 21: Updating the trade areas layer</a></li>
+  <li><a href="#step-22-visualising-the-geographic-distribution-of-smes-served-by-trade-areas" id="toc-step-22-visualising-the-geographic-distribution-of-smes-served-by-trade-areas" class="nav-link" data-scroll-target="#step-22-visualising-the-geographic-distribution-of-smes-served-by-trade-areas"><span class="header-section-number">3.5.4</span> Step 22: Visualising the geographic distribution of SMEs served by trade areas</a></li>
+  </ul></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><span class="header-section-number">3.6</span> Reference</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chap01.html">The Building Block</a></li><li class="breadcrumb-item"><a href="./chap03.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Trade Area Analysis and GeoVisualisation</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Trade Area Analysis and GeoVisualisation</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 31, 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">August 7, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-outcomes" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">3.1</span> Learning Outcomes</h2>
+<p>In this hands-on exercise, you will gain hands-on experience on using KNIME and GAEK to to perform trade area analysis and visualisation.</p>
+<p>By the end of this session, you will be able to:</p>
+<ul>
+<li><p>importing and wrangling geospatial data by using appropriate data manipulation and geoprocessing nodes of KNIME and GAEK,</p></li>
+<li><p>delineate trade areas by using appropriate proximity analysis and overlay operators of GEAK, and</p></li>
+<li><p>analyse trade areas using spatial overlay functions of GEAK, and</p></li>
+<li><p>visualise output of the geoprocessing and GIS analysis by using Geospatial View node of GAEK.</p></li>
+</ul>
+</section>
+<section id="trade-area-analysis-xbs-case-study" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="trade-area-analysis-xbs-case-study"><span class="header-section-number">3.2</span> Trade Area Analysis: XBS Case Study</h2>
+<section id="setting-the-scene" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="setting-the-scene"><span class="header-section-number">3.2.1</span> Setting the Scene</h3>
+<p>XBS is a well established local bank. It has a total of 30 branches scatter around the country. The bank is planning to launch a special low interest loan programme to help small- and medium-scale enterprises (SME) to improve the productivity of their workers. Before the scheme is launched, Richard Lim, the Senior Vice President of XBS Retail Banking would like to find out the numbers of SMEs located within the trade areas of XBS branches.</p>
+</section>
+<section id="what-is-trade-area-analysis" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="what-is-trade-area-analysis"><span class="header-section-number">3.2.2</span> What is Trade Area Analysis</h3>
+<p>A trade area is the geographic area from which a business draws its customers. The size of a trade area depends on the variety of goods and services offered in the community and its proximity to competing retail markets. In most cases, consumers are willing to travel further to purchase high order goods, such as automobiles, furniture, recreational vehicles, and specialty items than they are to purchase lower order goods, such as clothing, drugs, groceries and gasoline.</p>
+<p>Trade area analysis is a methodology, process or technique that provides a basis for understanding, visualizing and quantifying the extent and characteristics of known or approximated trade areas. It has been used by businesses to gain better understanding on the geographic extent and characteristics of business patronage, to assess business performance spatially, to perform competitive analysis, to evaluate market penetration and to identify market gap.</p>
+<p>Prior to GIS age, trade area analysis was a very time-consuming process. A simple trade area study for a retail operation can easily take more than six months or a year to complete. Today, with appropriate and readily available geospatial data and open source tools like KNIME Analytics Platform and its Geospatial Analytics Extension (GAEK), it is now feasible to complete a trade area analysis in a very short time, potentially within one or two hours.</p>
+</section>
+<section id="framing-the-problem-and-collecting-the-data" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="framing-the-problem-and-collecting-the-data"><span class="header-section-number">3.2.3</span> Framing the Problem and Collecting the Data</h3>
+<p>Three geospatial data are available for this study. They are:</p>
+<ul>
+<li>Locations of Banking facilities and their associated information (i.e.&nbsp;Banking)</li>
+<li>Location SME and their associated information (i.e.&nbsp;SME)</li>
+<li>Outline map of Singapore (i.e.&nbsp;CoastalOutline)</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These data sets can be found on eLearn, in a single zipped file (i.e.&nbsp;<em>Hands-on_Ex1b.zip</em>). You are required to download the zipped file, save it into your local drive and unzip the file. Throughout this hands-on exercise, we will assume that these geospatial data are stored in the <em>Hands-on_Ex1b</em> sub-folder of the coursework repository for example <em>ISSS626-AY2025-26Aug</em>-workspace sub-folder of your local drive.</p>
+</div>
+</div>
+</section>
+<section id="getting-started" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">3.2.4</span> Getting Started</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Use the procedures you learned in earlier chapter, start a new KNIME workflow. Name the workflow <em>Hands-on_Ex01b</em>.</li>
+<li>Create a sub-folder in <em>Hands-on_Ex01b</em> folder. Name the sub-folder <strong>data</strong>.</li>
+<li>Place the unzipped files from <em>Hands-on_Ex01b_data.zip</em> in <em>data</em> sub-folder.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="the-analytics-workflow" class="level3" data-number="3.2.5">
+<h3 data-number="3.2.5" class="anchored" data-anchor-id="the-analytics-workflow"><span class="header-section-number">3.2.5</span> The Analytics Workflow</h3>
+<p>Flow diagram below shows the complete workflow of the analysis. It comprises three main sub-flows:</p>
+<ul>
+<li>Importing and wrangling geospatial data (Step 1-11),</li>
+<li>Delineating trade areas (Step 12-17), and</li>
+<li>Analysing with trade areas (Step 18-21)</li>
+</ul>
+<p><img src="chap03/images/img01.jpg" class="img-fluid"></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is important to note that the nodes are not linearly connection. Students should observe the flows carefully and if necessary refer to the workflow diagram from time-to-time.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="importing-and-wrangling-geospatial-data" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="importing-and-wrangling-geospatial-data"><span class="header-section-number">3.3</span> Importing and Wrangling Geospatial Data</h2>
+<p>Geospatial data wrangling are the processes of cleaning, transforming, and structuring raw geospatial data into a usable format for geospatial analysis. They are usually performed after after the geospatial data have been imported. They involve handling issues like transforming projection, formatting inconsistencies, identifying and fixing dirty data and deriving new geospatial data to ensure data quality and accuracy for drawing reliable insights from the analysis.</p>
+<section id="step-1-importing-banking-data" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="step-1-importing-banking-data"><span class="header-section-number">3.3.1</span> Step 1: Importing banking data</h3>
+<p>In this step, <code>GeoFile Reader</code> of GAEK will be used to import <em>Banking</em> shapefile file into KNIME workflow.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the skills you learned from last exercise, import <em>Banking</em> shapefile into KNIME.</p>
+</div>
+</div>
+<p>When Banking layer imported successfully, the Geodata table of GeoFile Reader node should look similar to the screenshot below.</p>
+<p><img src="chap03/images/img02.jpg" class="img-fluid"></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>From the Geodata table of Banking, two data issues have been identified:</p>
+<ul>
+<li>it is in WGS 84 geographic coordinates system, and</li>
+<li>the data layer consists of more than XBS branches.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="step-2-transforming-projection" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="step-2-transforming-projection"><span class="header-section-number">3.3.2</span> Step 2: Transforming projection</h3>
+<p>In this step, <code>Projection</code> node of GAEK will be used to transform the coordinates system <em>Banking</em> layer from WGS 84 to SVY21.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the skills you learned from last exercise, transform the projection of Banking layer to SVY21.</p>
+</div>
+</div>
+<p>The Transformed geo table of <code>Projection</code> node should look similar to the screenshot below. It is in SVY21 Projected Coordinates System now!</p>
+<p><img src="chap03/images/img03.jpg" class="img-fluid"></p>
+</section>
+<section id="step-3-extracting-xbs-branches" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="step-3-extracting-xbs-branches"><span class="header-section-number">3.3.3</span> Step 3: Extracting XBS branches</h3>
+<p>The Banking layer consists of locations of banking facilities such as ATM, AXM, SAM and branches for several banks. We are only interested on bank branches belong to XBS. In this step, you will learn how to extract a subset of dataset from a master dataset using <code>Row Filter</code> node of KNIME.</p>
+<p>Before you can perform attribute query, you need to examine the <em>Banking</em> layer careful and to identify the appropriate field and object name to filter.</p>
+<ul>
+<li>Click on <code>GeoFile Reader</code> node.</li>
+</ul>
+<p>The <em>Geodata table</em> window appears on Node monitor window.</p>
+<p><img src="chap03/images/img04.jpg" class="img-fluid"></p>
+<p>Notice that a total of 2908 rows and each row represents a geospatial point object, in this case a particular banking facility. For example, the first record represents a SAM machine.</p>
+<p>If you scroll downwards, you will find that under the <em>DESC</em> field there are a collection of records with a description of <em>XBS</em>. This is actually the <em>XBS</em> branches.</p>
+<p>Next, you will extract all the <em>XBS</em> branches using <code>Row Filter</code> node of KNIME.</p>
+<ul>
+<li>From left menu, click on <strong>Nodes</strong>.</li>
+<li>At the <strong>Nodes</strong> pane, click on <strong>Manipulation</strong> -&gt; <strong>Row</strong> -&gt; <strong>Filter</strong>.</li>
+<li>Double-click on <code>Row Filter</code>.</li>
+</ul>
+<p><img src="chap03/images/img05.jpg" class="img-fluid" width="380"></p>
+<ul>
+<li>On the <code>Row Filter</code> node pane, complete the selections as shown below.</li>
+</ul>
+<p><img src="chap03/images/img06.jpg" class="img-fluid" width="380"></p>
+<ul>
+<li>Click on <strong>Apply</strong> button then follow up clicking on <strong>Execute</strong> button.</li>
+</ul>
+<p>Your screen should look similar to the figure below.</p>
+<p>Notice that there are only 30 rows in the output data table.</p>
+<p><img src="chap03/images/img07.jpg" class="img-fluid"></p>
+<ul>
+<li>Click on <em>DESC</em> column and verify that the values are all XBS.</li>
+</ul>
+</section>
+<section id="step-4-visualising-xbs-branche-locations" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="step-4-visualising-xbs-branche-locations"><span class="header-section-number">3.3.4</span> Step 4: Visualising XBS branche locations</h3>
+<p>It is always a good practice to visualise the output after processing the data. In this step, Geospatial View node will be used to reveal the geographic distribution of XBS branches.</p>
+<ul>
+<li>From the left pane, click on <strong>Nodes</strong>.</li>
+<li>From the <em>Nodes</em> pane, click on <strong>Community Nodes</strong> -&gt; <strong>Geospatial Analytics</strong> -&gt; <strong>Spatial Visualisation</strong>.</li>
+<li>Double-click on <strong>Geospatial View</strong>.</li>
+</ul>
+<p><img src="chap03/images/img08.jpg" class="img-fluid" width="400"></p>
+<p>The <code>Geospatial View</code> node will be added on the KNIME workbench.</p>
+<ul>
+<li><p>Connect <code>Row Filter</code> node (Step 3) with <code>Geospatial View</code> node (Step 4).</p></li>
+<li><p>Click on <code>Geospatial View</code> node to make it active.</p></li>
+<li><p>Refer to <strong>Geospatial View</strong> pane, for the <strong>Geometry</strong> column, make sure <em>geometry</em> is selected as shown.</p></li>
+</ul>
+<p><img src="chap03/images/img09.jpg" class="img-fluid" width="350"></p>
+<ul>
+<li>To execute the node, click on <strong>Apply</strong> button then, follow by <strong>Execute</strong> button.</li>
+</ul>
+<p>When the processing is completed, a point symbol map appears as shown below.</p>
+<p><img src="chap03/images/img10.jpg" class="img-fluid"></p>
+</section>
+<section id="step-5-importing-singapore-outline-layer" class="level3" data-number="3.3.5">
+<h3 data-number="3.3.5" class="anchored" data-anchor-id="step-5-importing-singapore-outline-layer"><span class="header-section-number">3.3.5</span> Step 5: Importing Singapore outline layer</h3>
+<p>In this section, you are required to import <em>CostalOutline</em> geospatial data int KNIME workflow. The data is in ESRI shapefile format.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the step you learned in earlier, import CostaOutline layer.</p>
+</div>
+</div>
+</section>
+<section id="step-6-visualising-coastaloutline-layer" class="level3" data-number="3.3.6">
+<h3 data-number="3.3.6" class="anchored" data-anchor-id="step-6-visualising-coastaloutline-layer"><span class="header-section-number">3.3.6</span> Step 6: Visualising CoastalOutline layer</h3>
+<p>It is time to visualise CoastalOutline layer on interactive map.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the step you learned in earlier to create an interactive map as shown below.</p>
+</div>
+</div>
+</section>
+<section id="step-7-preparing-singapore-outline-layer" class="level3" data-number="3.3.7">
+<h3 data-number="3.3.7" class="anchored" data-anchor-id="step-7-preparing-singapore-outline-layer"><span class="header-section-number">3.3.7</span> Step 7: Preparing Singapore outline layer</h3>
+<p>The plan is to use <em>CoastalOutline</em> layer as the extend boundary for deriving voronoi polygons (Step 15). However, the layer is far from satisfactory because there are many outer islands (refer to interactive map prepared in Step 6). In view of this, we will process the layer further by creating a 5-km dissolving buffer around the <em>CoastalOutline</em> layer.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the step you learned in earlier to create a 5-km dissolving buffer around <em>CoastalOutline</em> layer.</p>
+</div>
+</div>
+</section>
+<section id="step-8-visualising-the-processed-coastaloutline-layer" class="level3" data-number="3.3.8">
+<h3 data-number="3.3.8" class="anchored" data-anchor-id="step-8-visualising-the-processed-coastaloutline-layer"><span class="header-section-number">3.3.8</span> Step 8: Visualising the processed CoastalOutline layer</h3>
+<p>Now, let us have a look at the output layer after computing the dissolving buffer on <em>CoastalOutline</em> layer.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the step you learned in earlier to create an interactive map as shown below.</p>
+</div>
+</div>
+<p><img src="chap03/images/img12.jpg" class="img-fluid"></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that the output is a single polygon cover the entire Singapore mainland as well as the outer islands. This derived layer will be use for analysis purpose and not for claiming territorial.</p>
+</div>
+</div>
+</section>
+<section id="step-9-importing-smes-data" class="level3" data-number="3.3.9">
+<h3 data-number="3.3.9" class="anchored" data-anchor-id="step-9-importing-smes-data"><span class="header-section-number">3.3.9</span> Step 9: Importing SMEs data</h3>
+<p>Now, we are going to import the third geospatial data into KNIME workflow. It is <em>SMEs</em> data and is stored in ESRI shapefile format.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the step you learned in earlier, import <em>SMEs</em> layer.</p>
+</div>
+</div>
+</section>
+<section id="step-10-visualising-smes-data" class="level3" data-number="3.3.10">
+<h3 data-number="3.3.10" class="anchored" data-anchor-id="step-10-visualising-smes-data"><span class="header-section-number">3.3.10</span> Step 10: Visualising SMEs data</h3>
+<p>Similar to earlier steps, let us reveal the distribution of the SMEs by creating an interactive map.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the step you learned in earlier to create an interactive map as shown below.</p>
+</div>
+</div>
+<p><img src="chap03/images/img13.jpg" class="img-fluid"></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Oh no, the interactive map reveals that we have a serious data quality issue because there are several SMEs are located at in the sea (refer to the red circle).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are many possible reasons caused this data quality issue. In real world practice, it is necessary to refer back to the data owner and find out what causes the issue and identify appropriate solution to address the issue.</p>
+</div>
+</div>
+<p>In this exercise, we will simplify the procedure by excluding these data points from the analysis.</p>
+</section>
+<section id="step-11-cleaning-smes-data" class="level3" data-number="3.3.11">
+<h3 data-number="3.3.11" class="anchored" data-anchor-id="step-11-cleaning-smes-data"><span class="header-section-number">3.3.11</span> Step 11: Cleaning SMEs data</h3>
+<p>Since this is a geospatial data layer, a normal filter method will not be appropriate. To exclude SMEs located outside Singapore island, Clip node of SAEK will be used.</p>
+<p>This node will clip target geometries to the mask extent. Both layers must be in the same Coordinate Reference System (CRS), otherwise, the CRS of the right table will be transformed to that of the left table. The geometries will be clipped to the full extent of the clip object. If there are multiple polygons in the mask geometry column, the geometries in the target geometry column will be clipped to the total boundary of all mask polygons.</p>
+<ul>
+<li>From left menu, click on <strong>Nodes</strong>.</li>
+<li>At the <strong>Nodes</strong> pane, click on <strong>Community Nodes</strong> -&gt; <strong>Geospatial Analytics</strong> -&gt; <strong>Spatial Manipulation</strong>.</li>
+<li>Double-click on <code>Clip</code>.</li>
+</ul>
+<p><img src="chap03/images/img14.jpg" class="img-fluid" width="400"></p>
+<p>Since the target layer should be at the top node port,</p>
+<ul>
+<li>connect <code>GeoFile Reader</code> node (Step 9) to the top node port of <code>Clip</code> node (Step 11).</li>
+<li>connect <code>GeoFile Reader</code> node (Step 5) to the lower node port of <code>Clip</code> node (Step 11).</li>
+<li>click on <code>Clip</code> node to make it active.</li>
+</ul>
+<p>The Clip pane located on the right of KNIME workbench should look similar to the screenshot below.</p>
+<p><img src="chap03/images/img15.jpg" class="img-fluid" width="350"></p>
+<p>To execute the node,</p>
+<ul>
+<li>click on <strong>Apply</strong> button, then follow by <strong>Execute</strong> button.</li>
+</ul>
+<p>The output view should look similar to the screenshot below.</p>
+<p><img src="chap03/images/img16.jpg" class="img-fluid"></p>
+<p>Notice that the number of rows have been reduced to 36989 from 39595.</p>
+</section>
+<section id="step-12-visualising-the-cleaned-smes-data" class="level3" data-number="3.3.12">
+<h3 data-number="3.3.12" class="anchored" data-anchor-id="step-12-visualising-the-cleaned-smes-data"><span class="header-section-number">3.3.12</span> Step 12: Visualising the cleaned SMEs data</h3>
+<p>It is also important for us to confirm visually the SMEs layer are indeed contained inside Singapore only. This can be achived by displaying the output on an interactive map using <code>Geospatial View</code> node of GAEK.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the step you learned earlier to create an interactive map as shown below.</p>
+</div>
+</div>
+<p><img src="chap03/images/img17.jpg" class="img-fluid"></p>
+<p>Notice that all the SMEs points are contained within Singapore island now.</p>
+</section>
+</section>
+<section id="delineating-trade-areas-with-geoprocessing-methods" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="delineating-trade-areas-with-geoprocessing-methods"><span class="header-section-number">3.4</span> Delineating Trade Areas with Geoprocessing Methods</h2>
+<p>Geoprocessing is a framework for performing analysis and managing geospatial data using a set of tools and workflows. It allows users to manipulate geospatial data by taking geospatial data as input, applying operations like buffering or overlaying, and generating new output datasets. Geoprocessing is used to automate geospatial data management tasks, perform complex spatial analysis, build custom tools, and share workflows within the geoscience community.</p>
+<p>The buffer zone method is one of the quickest and simplest procedures for delineating a catchment area, representing the area by means of one or more concentric circles with the location at their centre.</p>
+<p>In this method, each zone is determined by the radius of the buffer zone measured ‘as the crow flies’ as shown in the figure below.</p>
+<p><img src="chap03/images/img18.jpg" class="img-fluid"></p>
+<p>Under normal circumstance, single buffer works well as shown by the buffer located at the lower centre of the figure below. How even when there are two buffers overlap each other as shown below, the allocation of SMEs will not be mutually exclusive as shown below.</p>
+<p><img src="chap03/images/img19.jpg" class="img-fluid"></p>
+<p>The possible solution is to split the overlapping buffers in such as a away that each SMEs will be assigned to its nearest XBS branch as shown below.</p>
+<p><img src="chap03/images/img20.jpg" class="img-fluid"></p>
+<p>In this section, you will learn how to use three geoprocessing methods, namely dissolving buffers, voronoi polygons and overlaying to delineate mutually exclusive trade areas of XBS branches.</p>
+<section id="step-13-creating-dissolving-buffers" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="step-13-creating-dissolving-buffers"><span class="header-section-number">3.4.1</span> Step 13: Creating dissolving buffers</h3>
+<p>In this step, you are going to create a 1km buffer around the XBS bank branches. Typically, Buffer node of GAEK will be used. However, in our case, <code>Multiple Ring Buffer</code> node of GAEK will be used instead.</p>
+<ul>
+<li>From left menu, click on <strong>Nodes</strong>.</li>
+<li>At the <strong>Nodes</strong> pane, click on <strong>Community Nodes</strong> -&gt; <strong>Geospatial Analytics</strong> -&gt; <strong>Spatial Manipulation</strong>.</li>
+<li>Double-click on <code>Multiple Ring Buffer</code>.</li>
+</ul>
+<p><img src="chap03/images/img21.jpg" class="img-fluid" width="380"></p>
+<ul>
+<li>On KNIME workbench, connect <code>Row Filter</code> node to <code>Multiple Ring Buffer</code> node.</li>
+<li>Double-click on <code>Multiple Ring Buffer</code> node to make it active.</li>
+<li>From the <code>Multiple Ring Buffer</code> pane located on the right of KNIME workbench, complete the selection as shown below.</li>
+</ul>
+<p><img src="chap03/images/img22.jpg" class="img-fluid" width="385"></p>
+<ul>
+<li>Click on <strong>Apply</strong> button follow by <strong>Execute</strong> button.</li>
+</ul>
+<p>When the process is completed, the output table should look similar to the screenshot below.</p>
+<p><img src="chap03/images/img23.jpg" class="img-fluid"></p>
+<p>Surprise! There is only one geospatial polygon object created.</p>
+</section>
+<section id="step-14-visualising-the-dissolving-buffers" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="step-14-visualising-the-dissolving-buffers"><span class="header-section-number">3.4.2</span> Step 14: Visualising the dissolving buffers</h3>
+<p>It is always a good practice the output of the geoprocessing. In this step, <code>Geospatial View</code> node will be used to create an interactive showing the merged ring buffer areas of XBS branches.</p>
+<ul>
+<li>From left menu, click on <strong>Nodes</strong>.</li>
+<li>At the <strong>Nodes</strong> pane, click on <strong>Community Nodes</strong> -&gt; <strong>Geospatial Analytics</strong> -&gt; <strong>Spatial Visualization</strong>.</li>
+<li>Double-click on <code>Geospatial View</code>.</li>
+</ul>
+<p><img src="chap03/images/img24.jpg" class="img-fluid" width="400"></p>
+<ul>
+<li><p>On KNIME workbench, connect <code>Multiple Ring Buffer</code> node to <code>Geospatial View</code> node.</p></li>
+<li><p>From the <code>Geospatial View</code> pane located on the right of KNIME workbench, select <strong>Buffer</strong> from the drop-down list as shown below.</p></li>
+</ul>
+<p><img src="chap03/images/img25.jpg" class="img-fluid" width="400"></p>
+<ul>
+<li><p>Click on <strong>Apply</strong> button follow by <strong>Execute</strong> button.</p></li>
+<li><p>When the process is completed, at the <strong>View</strong> pane, click on <code>Open in a new window</code> button.</p></li>
+</ul>
+<p>A new window pop-up showing the merged buffer areas of XBS branches.</p>
+<p><img src="chap03/images/img26.jpg" class="img-fluid"></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that several trades areas have been merged into single large polygons. However, our analysis required each XBS branch has it own trade area. Our next challenge is to spit these large merged trade areas into individual trade areas.</p>
+</div>
+</div>
+</section>
+<section id="step-15-creating-voronoi-polygons" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="step-15-creating-voronoi-polygons"><span class="header-section-number">3.4.3</span> Step 15: Creating voronoi polygons</h3>
+<p>Voronoi polygons, also known as <a href="http://h2g2.com/dna/h2g2/A901937">Thiessen polygons</a>, represent areas of influence around a set of focal points (or retail outlets as in this study). They can be generated based on a set of points as centroid for the polygons. Voronoi polygons have been so constructed that each polygon contains exactly one of the outlets and that any location with a Voronoi polygon is closer to that point outlet (centroid) than to any other point outlets.</p>
+<p><img src="chap03/images/img27.jpg" class="img-fluid" width="280"></p>
+<p>This polygon structure is constructed by using the perpendicular bisectors between neighbouring points (in this case, retail outlets) as the boundaries of the resulting Voronoi polygons.</p>
+<p><img src="chap03/images/img28.jpg" class="img-fluid" width="400"></p>
+<ul>
+<li>From left menu, click on <strong>Nodes</strong>.</li>
+<li>At the <strong>Nodes</strong> pane, click on <strong>Community Nodes</strong> -&gt; <strong>Geospatial Analytics</strong> -&gt; <strong>Spatial Manipulation</strong>.</li>
+<li>Double-click on <code>Voronoi (Theessen) Polygon</code> node.</li>
+</ul>
+<p><img src="chap03/images/img29.jpg" class="img-fluid" width="400"></p>
+<ul>
+<li>Connect the output of <code>Raw Filter</code> (Step 3) node to the top input port of <code>Voronoi (Thiessen) Polygon</code> (Step 15) node.</li>
+<li>Connect the output of Multiple Ring Buffer node (Step 7) to the lower input port of <code>Voronoi (Thiessen) Polygon</code> (Step 15) node.</li>
+<li>From the workflow, click on <code>Voronoi (Theisseon) Polygon</code> node to make it active.</li>
+</ul>
+<p>The <strong>Voronoi (Thiessen) Polygons</strong> pane should look similar to the screenshot below. If it is not, refer to the screenshot below and update the missing or incorrect selection accordingly.</p>
+<p><img src="chap03/images/img30.jpg" class="img-fluid" width="400"></p>
+<ul>
+<li>To execute the node, click on <strong>Apply</strong> button then follow by <strong>Execute</strong> button.</li>
+</ul>
+<p>Figure below shows the output table of Voronoi (Thiessen) polygons table. Notice that there are only 29 rows instead of 30 rows.</p>
+<p><img src="chap03/images/img32.jpg" class="img-fluid" width="480"></p>
+</section>
+<section id="step-16-visualising-voronoi-polygons" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="step-16-visualising-voronoi-polygons"><span class="header-section-number">3.4.4</span> Step 16: Visualising voronoi polygons</h3>
+<p>Next, let us visualise the newly derived Voronoi polygon layer.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the step you learned earlier, create an interactive map showing the Voronoi polygon layer.</p>
+</div>
+</div>
+<p>Your screen should look similar to screenshot below.</p>
+<p><img src="chap03/images/img31.jpg" class="img-fluid"></p>
+</section>
+<section id="step-17-tidying-trade-areas" class="level3" data-number="3.4.5">
+<h3 data-number="3.4.5" class="anchored" data-anchor-id="step-17-tidying-trade-areas"><span class="header-section-number">3.4.5</span> Step 17: Tidying trade areas</h3>
+<p>In this step, Overlying node of GAEK will be used to derive a composite trade areas by using the Dissolving buffer layer and the Voronoi (Thiessen) Polygon layer. The overlay operator used will be <strong>Identity</strong>.</p>
+<ul>
+<li>From left menu, click on <strong>Nodes</strong>.</li>
+<li>At the <strong>Nodes</strong> pane, click on <strong>Community Nodes</strong> -&gt; <strong>Geospatial Analytics</strong> -&gt; <strong>Spatial Manipulation</strong>.</li>
+<li>Double-click on <code>Overlay</code>.</li>
+</ul>
+<p><img src="chap03/images/img33.jpg" class="img-fluid" width="380"></p>
+<ul>
+<li>On KNIME workbench, connect output of <code>Multiple Ring Buffer</code> node (Step 13) to the upper input node port of <code>Overlay</code> node (Step 17).</li>
+<li>Connect output of <code>Voronoi (Thiessen) Polygon</code> node (Step 15) to the lower input node port of <code>Overlay</code> node (Step 17).</li>
+<li>Double-click on <code>Overlay</code> node to make it active.</li>
+<li>From the <code>Overlay</code> pane located on the right of KNIME workbench, complete the selection as shown below.</li>
+</ul>
+<p><img src="chap03/images/img34.jpg" class="img-fluid" width="320"></p>
+<ul>
+<li>To execute the node, click on <strong>Apply</strong> button then follow by <strong>Execute</strong> button.</li>
+</ul>
+<p>When the process is completed, the output table should look similar to the screenshot below.</p>
+<p><img src="chap03/images/img35.jpg" class="img-fluid" width="400"></p>
+</section>
+<section id="step-18-visualising-the-tidied-trade-areas" class="level3" data-number="3.4.6">
+<h3 data-number="3.4.6" class="anchored" data-anchor-id="step-18-visualising-the-tidied-trade-areas"><span class="header-section-number">3.4.6</span> Step 18: Visualising the tidied trade areas</h3>
+<p>It is time to take a good look at the composited trade areas.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DIY
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the step you learned earlier, create an interactive map showing the composite trade areas layer output from Overlay node (Step 17).</p>
+</div>
+</div>
+<p>The interactive map should look similar to the figure below.</p>
+<p><img src="chap03/images/img36.jpg" class="img-fluid"></p>
+<p>Notice that the multiple part buffer is split into 29 separate trade areas.</p>
+</section>
+</section>
+<section id="analysing-with-trade-areas" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="analysing-with-trade-areas"><span class="header-section-number">3.5</span> Analysing with trade areas</h2>
+<p>In this section, we would like to find out the numbers of SME fall within 1-km trade areas of XBS branches.</p>
+<section id="step-19-allocating-smes-to-trade-areas" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="step-19-allocating-smes-to-trade-areas"><span class="header-section-number">3.5.1</span> Step 19: Allocating SMEs to trade areas</h3>
+<p>In this step, we are going allocate SMEs to their respective trade area. This is going to be performed by using Overlying operation between the <em>Cleaned SMEs</em> layer and the <em>Composite Trade Areas</em> layer.</p>
+<ul>
+<li>On the <strong>Side panel navigation</strong>, click on <strong>Nodes</strong>.</li>
+<li>On <strong>Nodes</strong> pane, click on <strong>Community Nodes</strong> -&gt; <strong>Geospatial Analytics</strong> -&gt; <strong>Spatial Manipulation</strong>.</li>
+<li>Double-click on <code>Overlay</code> node.</li>
+</ul>
+<p><img src="chap03/images/img37.jpg" class="img-fluid" width="400"></p>
+<p>On the workflow view,</p>
+<ul>
+<li>connect the flow variable output port of <code>Overlay</code> node (Step 17) to the top input flow variable port of the <code>Overlay</code> node (Step 19),</li>
+<li>connect the flow variable output port of <code>Clip</code> node (Step 11) to the lower input flow variable port of the <code>Overlay</code> node (Step 19).</li>
+<li>click on <code>Overlay</code> node (Step 19) to make it active.</li>
+</ul>
+<p>On the <strong>Overlay</strong> pane,</p>
+<ul>
+<li>confirm that the options selections are similar to the screenshot below. If necessary, change the selections by using their respective drop-down list.</li>
+</ul>
+<p><img src="chap03/images/img38.jpg" class="img-fluid" width="380"></p>
+<ul>
+<li>Click on <strong>Apply</strong> button then follow by <strong>Execute</strong> button.</li>
+</ul>
+<p>When the overlaying operation completed, the Overlayed geo table appears on Node monitor window as shown below.</p>
+<p><img src="chap03/images/img39.jpg" class="img-fluid"></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quiz
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Describe two observations you can draw from the table above.</p>
+</div>
+</div>
+</section>
+<section id="step-20-counting-numbers-of-sme-in-each-trade-area" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="step-20-counting-numbers-of-sme-in-each-trade-area"><span class="header-section-number">3.5.2</span> Step 20: Counting numbers of SME in each trade area</h3>
+<p>In his step, <code>GroupBy</code> node of KNIME will be used to count the numbers of SME allocate to the trade areas.</p>
+<ul>
+<li>On the <strong>Side panel navigation</strong>, click on Nodes.</li>
+<li>On <strong>Nodes</strong> pane, click on <strong>Manipulation</strong> -&gt; <strong>Row</strong> -&gt; <strong>Transform</strong>.</li>
+<li>Double-click on <code>GroupBy</code> node.</li>
+</ul>
+<p><img src="chap03/images/img40.jpg" class="img-fluid" width="380"></p>
+<ul>
+<li>On the Workflow editor window, connect <code>Overlay</code> node (Step 19) to <code>GroupBy</code> node (Step 20).</li>
+<li>Double-click on <code>GroupBy</code> node to open its dialog window.</li>
+</ul>
+<p>By default, the <strong>Groups</strong> tab will be selected.</p>
+<p><img src="chap03/images/img41.jpg" class="img-fluid"></p>
+<ul>
+<li>Make sure <em>Thiessen ID</em> is listed in the <strong>Group column(s)</strong> pane.</li>
+<li>Next, click on <strong>Manual Aggregation</strong> tab.</li>
+<li>From the <strong>Available column(s)</strong> pane, click on <em>ID</em>.</li>
+<li>From <strong>Select</strong> pane, click on <img src="chap03/images/img42a.jpg" class="img-fluid" width="102">.</li>
+</ul>
+<p><img src="chap03/images/img42.jpg" class="img-fluid"></p>
+<ul>
+<li>From the <em>Aggregation (click to change)</em> column, select <em>Count</em> from the drop-down list.</li>
+</ul>
+<p><img src="chap03/images/img42b.jpg" class="img-fluid" width="480"></p>
+<ul>
+<li>To complete the selection, click on <strong>Apply</strong> button, follow by <strong>OK</strong> button.</li>
+</ul>
+<p>The dialog window of <strong>GroupBy</strong> will be closed.</p>
+<ul>
+<li>Click on <code>GroupBy</code> node, then click on the <strong>Execute</strong> button to execute the node.</li>
+</ul>
+<p>When to computation completed, <strong>Group table</strong> of <code>GroupBy</code> node appears on the <strong>Node monitor</strong> window as shown below.</p>
+<p><img src="chap03/images/img43.jpg" class="img-fluid" width="400"></p>
+<p>The table consists of two columns (excluding RowID column because it is internal to KNIME) and 29 rows, namely Thiessen ID and Count*(ID) whereby the values in Count*(ID) field indicate numbers of SME with the trade areas.</p>
+</section>
+<section id="step-21-updating-the-trade-areas-layer" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="step-21-updating-the-trade-areas-layer"><span class="header-section-number">3.5.3</span> Step 21: Updating the trade areas layer</h3>
+<p>Before we can visualise the geographic distribution of SMEs serve by XBS branches, we need to append Count*(ID) column to the data table of tidies trade area layer. This is going to be performed by using <code>Joiner</code> node of KNIME.</p>
+<ul>
+<li>On the <strong>Side panel navigation</strong>, click on* *Nodes**.</li>
+<li>On <strong>Nodes</strong> pane, click on <strong>Manipulation</strong> -&gt; <strong>Column</strong> -&gt; <strong>Split &amp; Combine</strong>.</li>
+<li>Double-click on <code>Joiner</code> node.</li>
+</ul>
+<p><img src="chap03/images/img44.jpg" class="img-fluid" width="380"></p>
+<p>On the workflow view,</p>
+<ul>
+<li>connect the flow variable output port of <code>Overlay</code> node (Step 17) to the top input flow variable port of <code>Joiner</code> node (Step 21),</li>
+<li>connect the flow variable output port of <code>GroupBy</code> node (Step 20) to the lower input flow variable port of the <code>Joiner</code> node (Step 21).</li>
+<li>click on <code>Joiner</code> node (Step 21) to make it active.</li>
+<li>From the <strong>Joiner node</strong> pane, complete the options as shown below. For the remining options, keep the default selections.</li>
+</ul>
+<p><img src="chap03/images/img45a.jpg" class="img-fluid" width="350"> <img src="chap03/images/img45b.jpg" class="img-fluid" width="350"></p>
+<ul>
+<li>When you are ready to run the operation, click on the <strong>Apply</strong> button follow by <strong>Execute</strong> node.</li>
+</ul>
+<p>When the processing completed, the Join result data table appears on the Node monitor window as shown below.</p>
+<p><img src="chap03/images/img45c.jpg" class="img-fluid"></p>
+</section>
+<section id="step-22-visualising-the-geographic-distribution-of-smes-served-by-trade-areas" class="level3" data-number="3.5.4">
+<h3 data-number="3.5.4" class="anchored" data-anchor-id="step-22-visualising-the-geographic-distribution-of-smes-served-by-trade-areas"><span class="header-section-number">3.5.4</span> Step 22: Visualising the geographic distribution of SMEs served by trade areas</h3>
+<p>Lastly, Geospatial View node will be used to create a choropleth map to visualise the geographic distribution of SMEs by trades areas.</p>
+<p>Choropleth mapping involves the symbolization of enumeration units, such as countries, provinces, states, counties or census units, using area patterns or graduated colors. For example, a crime analyst may need to use a choropleth map to portray the spatial patterns of household income distribution of Singapore by DGP (Development Guide Plan) Subzone.</p>
+<p>The major concerns of choropleth mapping are the method of data classification, areal symbolization, and the overall map design. General rules for choropleth mapping are as follows:</p>
+<ul>
+<li>Use data that are assumed to be uniform throughout an enumeration unit.</li>
+<li>Because enumeration units vary in size, do not map totals. Use derived values, such as ratios, rates, proportions, or percentages.</li>
+<li>The best classing method depends on the data, the map reader and the purpose of the map.</li>
+<li>When classifying data, the full range of data must be included and class values should not overlap. No more than six classes are recommended.</li>
+<li>Class symbols (i.e.&nbsp;colors or patterns) must be easily distinguishable.</li>
+</ul>
+<p>In this step, <code>Geospatial View</code> node will be used to create an interactive choropleth, however, the options selections will be different slightly.</p>
+<ul>
+<li>From <strong>Side panel navigation</strong> pane, click on <strong>Nodes</strong>.</li>
+<li>At the <strong>Nodes</strong> pane, click on <strong>Community Nodes</strong> -&gt; <strong>Geospatial Analytics</strong> -&gt; <strong>Spatial Visualization</strong>.</li>
+</ul>
+<p><img src="chap03/images/img46.jpg" class="img-fluid" width="380"></p>
+<ul>
+<li>On <strong>Workflow editor</strong> window, double-click on <code>Geospatial View</code> node to make it active.</li>
+</ul>
+<p>From <strong>Geospatial View</strong> pane,</p>
+<ul>
+<li>for <em>Geometry column</em>, if necessary, select <em>geometry</em> from the drop-down list.</li>
+<li>for <em>Includes</em> pane of <em>Marker tooltip columns</em>, includes <em>Thiessen ID</em> and <em>Count/*(ID)</em>.</li>
+</ul>
+<p><img src="chap03/images/img47a.jpg" class="img-fluid" width="350"></p>
+<ul>
+<li>Scroll downward until <strong>Colouring Settings</strong> appears.</li>
+<li>For <strong>Marker color</strong> column, select <em>Cout/*(ID)</em> from the drop-down list.</li>
+<li>For <strong>Color map</strong>, select a single colour scheme such as <em>copper_r</em> from the drop-down list.</li>
+<li>For <strong>Classification method</strong>, select <em>Quantiles</em> from the drop-down list.</li>
+<li>For <strong>Number of classes</strong>, select <em>4</em>.</li>
+</ul>
+<p><img src="chap03/images/img47b.jpg" class="img-fluid" width="350"></p>
+<ul>
+<li>Scroll downward further until <strong>Color Legend Setting</strong>.</li>
+<li>Click on the checkbox in front of <strong>Show color legend</strong>.</li>
+</ul>
+<p><img src="chap03/images/img47c.jpg" class="img-fluid" width="350"></p>
+<p>To execute the node,</p>
+<ul>
+<li>click on <strong>Apply</strong> button then follow by <strong>Execute</strong> button.</li>
+</ul>
+<p>When the computation completed, the interactive choropleth map appears on the Node monitor window.</p>
+<ul>
+<li>From the <strong>Node monitor</strong> window, click on <em>Open in new window</em>.</li>
+</ul>
+<p>Your screen should look similar to the screenshot below.</p>
+<p><img src="chap03/images/img48.jpg" class="img-fluid"></p>
+</section>
+</section>
+<section id="reference" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="reference"><span class="header-section-number">3.6</span> Reference</h2>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chap02.html" class="pagination-link" aria-label="Geospatial Data Science with GAEK">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Geospatial Data Science with GAEK</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chap04.html" class="pagination-link" aria-label="1st Order Spatial Point Patterns Analysis Methods">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">1st Order Spatial Point Patterns Analysis Methods</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
